@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "pl",
+  "strings" : {
+    "NSMicrophoneUsageDescription" : {
+      "comment" : "Privacy - Microphone Usage Description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VoiceAI records your voice while you hold the dictation key and turns it into text on this Mac."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VoiceAI nagrywa głos, dopóki trzymasz klawisz dyktowania, i zamienia go na tekst na tym Macu."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

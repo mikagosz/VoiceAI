@@ -1,0 +1,2074 @@
+{
+  "sourceLanguage": "pl",
+  "strings": {
+    "%lld wpisów": {
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld wpis"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld wpisy"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld wpisów"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld wpisu"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld entry"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld entries"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Anuluj": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj"
+          }
+        }
+      }
+    },
+    "Aplikacje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacje"
+          }
+        }
+      }
+    },
+    "Automatycznie — jak w systemie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic — same as the system"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatycznie — jak w systemie"
+          }
+        }
+      }
+    },
+    "Brak dostępu do mikrofonu — włącz go w menu VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No microphone access — turn it on in the VoiceAI menu"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak dostępu do mikrofonu — włącz go w menu VoiceAI"
+          }
+        }
+      }
+    },
+    "Brak zainstalowanych głosów w tym języku — pobierzesz je w menu Głos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No voices installed for this language — get them from the Voice menu."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak zainstalowanych głosów w tym języku — pobierzesz je w menu Głos."
+          }
+        }
+      }
+    },
+    "Czytaj odpowiedzi Claude'a": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read Claude's replies"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czytaj odpowiedzi Claude'a"
+          }
+        }
+      }
+    },
+    "Czytaj odpowiedzi na głos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read replies aloud"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czytaj odpowiedzi na głos"
+          }
+        }
+      }
+    },
+    "Dodaj": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj"
+          }
+        }
+      }
+    },
+    "Dodaj aplikację…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add App…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj aplikację…"
+          }
+        }
+      }
+    },
+    "Dodaj własny model": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Your Own Model"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj własny model"
+          }
+        }
+      }
+    },
+    "Dodaj własny model…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Your Own Model…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj własny model…"
+          }
+        }
+      }
+    },
+    "Dyktowanie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictation"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyktowanie"
+          }
+        }
+      }
+    },
+    "Dyktuj, gdy nie stoisz w żadnym polu tekstowym — tekst trafi tutaj.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictate when no text field is focused — the text lands here."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dyktuj, gdy nie stoisz w żadnym polu tekstowym — tekst trafi tutaj."
+          }
+        }
+      }
+    },
+    "Działa na tym Macu, bez internetu. Pobiera się dopiero na żądanie i zwalnia pamięć po 10 minutach bez użycia. Porządkowanie czasem zmienia sens zdania, dlatego jest domyślnie wyłączone. Własny model: dowolny model MLX z Hugging Face (np. z mlx-community) albo folder z dysku — kliknij model, żeby go wybrać.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runs on this Mac, without the internet. Downloads only when you ask, and frees its memory after 10 minutes unused. Tidying sometimes changes what a sentence means, so it is off by default. Your own model: any MLX model from Hugging Face (e.g. from mlx-community) or a folder on disk — click a model to use it."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Działa na tym Macu, bez internetu. Pobiera się dopiero na żądanie i zwalnia pamięć po 10 minutach bez użycia. Porządkowanie czasem zmienia sens zdania, dlatego jest domyślnie wyłączone. Własny model: dowolny model MLX z Hugging Face (np. z mlx-community) albo folder z dysku — kliknij model, żeby go wybrać."
+          }
+        }
+      }
+    },
+    "Dziennik": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziennik"
+          }
+        }
+      }
+    },
+    "Dziennik VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI Journal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziennik VoiceAI"
+          }
+        }
+      }
+    },
+    "Dziennik jest pusty": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The journal is empty"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziennik jest pusty"
+          }
+        }
+      }
+    },
+    "Dziennik…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziennik…"
+          }
+        }
+      }
+    },
+    "Dziś: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziś: %@"
+          }
+        }
+      }
+    },
+    "Edytuj słownik…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit Word List…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edytuj słownik…"
+          }
+        }
+      }
+    },
+    "Eksportuj…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportuj…"
+          }
+        }
+      }
+    },
+    "Folder modelu MLX — z plikiem config.json i wagami .safetensors": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An MLX model folder — with config.json and .safetensors weights"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder modelu MLX — z plikiem config.json i wagami .safetensors"
+          }
+        }
+      }
+    },
+    "Gdy nie ma pola tekstowego": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When there is no text field"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy nie ma pola tekstowego"
+          }
+        }
+      }
+    },
+    "Gotowy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowy"
+          }
+        }
+      }
+    },
+    "Gotowy — trzymaj prawy ⌥ i mów": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready — hold right ⌥ and speak"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowy — trzymaj prawy ⌥ i mów"
+          }
+        }
+      }
+    },
+    "Głos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voice"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Głos"
+          }
+        }
+      }
+    },
+    "Historia jest pusta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History is empty"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historia jest pusta"
+          }
+        }
+      }
+    },
+    "Hook czytania odpowiedzi zostaje w ~/.claude/settings.json — usuń wpis z „--claude-hook” ręcznie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The reply-reading hook stays in ~/.claude/settings.json — remove the “--claude-hook” entry by hand."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook czytania odpowiedzi zostaje w ~/.claude/settings.json — usuń wpis z „--claude-hook” ręcznie."
+          }
+        }
+      }
+    },
+    "Ikona w pasku menu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu bar icon"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona w pasku menu"
+          }
+        }
+      }
+    },
+    "Język mowy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech language"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Język mowy"
+          }
+        }
+      }
+    },
+    "Język programu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App language"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Język programu"
+          }
+        }
+      }
+    },
+    "Kopiuj": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiuj"
+          }
+        }
+      }
+    },
+    "Kopiuj wszystko": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy All"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiuj wszystko"
+          }
+        }
+      }
+    },
+    "Kopiuj zaznaczone (%lld)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Selected (%lld)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiuj zaznaczone (%lld)"
+          }
+        }
+      }
+    },
+    "Kropka na końcu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full stop at end"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kropka na końcu"
+          }
+        }
+      }
+    },
+    "Mała — kółko": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small — circle"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mała — kółko"
+          }
+        }
+      }
+    },
+    "Mikrofon: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Microphone: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mikrofon: %@"
+          }
+        }
+      }
+    },
+    "Model Whisper nie jest jeszcze wczytany.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Whisper model is not loaded yet."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model Whisper nie jest jeszcze wczytany."
+          }
+        }
+      }
+    },
+    "Model językowy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language model"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model językowy"
+          }
+        }
+      }
+    },
+    "Model językowy nie jest pobrany.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The language model is not downloaded."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model językowy nie jest pobrany."
+          }
+        }
+      }
+    },
+    "Model nie ma pliku config.json.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model has no config.json file."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model nie ma pliku config.json."
+          }
+        }
+      }
+    },
+    "Model w formacie MLX z Hugging Face, np. z mlx-community. Wklej nazwę albo link — program sprawdzi go, zanim cokolwiek pobierze.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An MLX model from Hugging Face, e.g. from mlx-community. Paste its name or link — it is checked before anything downloads."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model w formacie MLX z Hugging Face, np. z mlx-community. Wklej nazwę albo link — program sprawdzi go, zanim cokolwiek pobierze."
+          }
+        }
+      }
+    },
+    "Modele": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modele"
+          }
+        }
+      }
+    },
+    "Modele i pliki": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models and files"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modele i pliki"
+          }
+        }
+      }
+    },
+    "Nagrywam…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recording…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nagrywam…"
+          }
+        }
+      }
+    },
+    "Nie ma takiego modelu na Hugging Face (albo wymaga logowania).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No such model on Hugging Face (or it needs a login)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie ma takiego modelu na Hugging Face (albo wymaga logowania)."
+          }
+        }
+      }
+    },
+    "Nie pobrany": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not downloaded"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie pobrany"
+          }
+        }
+      }
+    },
+    "Nie tłumacz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don't translate"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie tłumacz"
+          }
+        }
+      }
+    },
+    "Nie udało się pobrać modelu: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't download the model: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się pobrać modelu: %@"
+          }
+        }
+      }
+    },
+    "Nie udało się przepisać „%@”": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't transcribe “%@”"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się przepisać „%@”"
+          }
+        }
+      }
+    },
+    "Nie udało się wczytać modelu: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't load the model: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się wczytać modelu: %@"
+          }
+        }
+      }
+    },
+    "Nie udało się zapisać słownika: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not save the word list: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać słownika: %@"
+          }
+        }
+      }
+    },
+    "Nie znaleziono mikrofonu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No microphone found."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie znaleziono mikrofonu."
+          }
+        }
+      }
+    },
+    "Nowy język pojawi się po ponownym uruchomieniu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The new language shows after a restart."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy język pojawi się po ponownym uruchomieniu."
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Odinstalować VoiceAI?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uninstall VoiceAI?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odinstalować VoiceAI?"
+          }
+        }
+      }
+    },
+    "Odinstaluj": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uninstall"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odinstaluj"
+          }
+        }
+      }
+    },
+    "Odinstaluj VoiceAI…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uninstall VoiceAI…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odinstaluj VoiceAI…"
+          }
+        }
+      }
+    },
+    "Odpowiedzi Claude'a": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude's replies"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiedzi Claude'a"
+          }
+        }
+      }
+    },
+    "Ostatnie — kliknij, by skopiować": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent — click to copy"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ostatnie — kliknij, by skopiować"
+          }
+        }
+      }
+    },
+    "Plik dziennika jest uszkodzony — nie zapisuję, żeby go nie nadpisać.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The journal file is damaged — not saving, so it isn't overwritten."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik dziennika jest uszkodzony — nie zapisuję, żeby go nie nadpisać."
+          }
+        }
+      }
+    },
+    "Plik „%@” przyszedł uszkodzony — suma kontrolna się nie zgadza. Spróbuj pobrać jeszcze raz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file “%@” arrived damaged — its checksum does not match. Try downloading again."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik „%@” przyszedł uszkodzony — suma kontrolna się nie zgadza. Spróbuj pobrać jeszcze raz."
+          }
+        }
+      }
+    },
+    "Pobieram %@…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading %@…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobieram %@…"
+          }
+        }
+      }
+    },
+    "Pobieram model Whisper… %lld%%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloading the Whisper model… %lld%%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobieram model Whisper… %lld%%"
+          }
+        }
+      }
+    },
+    "Pobierz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobierz"
+          }
+        }
+      }
+    },
+    "Pobierz więcej głosów…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get More Voices…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobierz więcej głosów…"
+          }
+        }
+      }
+    },
+    "Pobrany — wczyta się przy pierwszym użyciu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded — loads on first use"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobrany — wczyta się przy pierwszym użyciu"
+          }
+        }
+      }
+    },
+    "Pokazuj pasek z poziomem głosu na ekranie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the voice level bar on screen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokazuj pasek z poziomem głosu na ekranie"
+          }
+        }
+      }
+    },
+    "Pokaż folder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Folder"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż folder"
+          }
+        }
+      }
+    },
+    "Pokaż w Finderze": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Finder"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż w Finderze"
+          }
+        }
+      }
+    },
+    "Porządkuj tekst — bez „yyy”, powtórzeń, z interpunkcją": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidy the text — no “uh”, no repeats, with punctuation"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porządkuj tekst — bez „yyy”, powtórzeń, z interpunkcją"
+          }
+        }
+      }
+    },
+    "Porządkuję…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidying…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porządkuję…"
+          }
+        }
+      }
+    },
+    "Przepisuję plik — dyktowanie po zakończeniu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribing a file — dictation when it is done"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przepisuję plik — dyktowanie po zakończeniu"
+          }
+        }
+      }
+    },
+    "Przepisuję „%@” — %lld%%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribing “%@” — %lld%%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przepisuję „%@” — %lld%%"
+          }
+        }
+      }
+    },
+    "Przepisz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribe"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przepisz"
+          }
+        }
+      }
+    },
+    "Przepisz plik audio lub wideo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribe an audio or video file"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przepisz plik audio lub wideo"
+          }
+        }
+      }
+    },
+    "Przepisz plik audio lub wideo…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribe Audio or Video File…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przepisz plik audio lub wideo…"
+          }
+        }
+      }
+    },
+    "Rozpoznaję…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognising…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozpoznaję…"
+          }
+        }
+      }
+    },
+    "Rozpoznawanie mowy · wymagany": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech recognition · required"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozpoznawanie mowy · wymagany"
+          }
+        }
+      }
+    },
+    "Spacja na końcu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space at end"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spacja na końcu"
+          }
+        }
+      }
+    },
+    "Sprawdź": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź"
+          }
+        }
+      }
+    },
+    "Spróbuj ponownie wczytać model": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try Loading the Model Again"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spróbuj ponownie wczytać model"
+          }
+        }
+      }
+    },
+    "Szeroka — pastylka": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide — pill"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szeroka — pastylka"
+          }
+        }
+      }
+    },
+    "Słownik i reguły aplikacji": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word list and app rules"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słownik i reguły aplikacji"
+          }
+        }
+      }
+    },
+    "Słownik ma błąd — używam poprzedniej wersji.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The word list has an error — using the previous version."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słownik ma błąd — używam poprzedniej wersji."
+          }
+        }
+      }
+    },
+    "Tekst zawsze trafia do dziennika VoiceAI. Plik na biurku robi Finder, tak jak przy zwykłym wklejeniu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The text always goes to the VoiceAI journal. Finder makes the desktop file, as with a normal paste."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekst zawsze trafia do dziennika VoiceAI. Plik na biurku robi Finder, tak jak przy zwykłym wklejeniu."
+          }
+        }
+      }
+    },
+    "Ten tydzień: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten tydzień: %@"
+          }
+        }
+      }
+    },
+    "To nie jest model w formacie MLX — brak plików .safetensors. Szukaj w mlx-community.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not an MLX model — no .safetensors files. Look in mlx-community."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To nie jest model w formacie MLX — brak plików .safetensors. Szukaj w mlx-community."
+          }
+        }
+      }
+    },
+    "Tryb szeptu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper mode"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb szeptu"
+          }
+        }
+      }
+    },
+    "Tryb szeptu — trzymaj prawy ⌥ i szepcz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper mode — hold right ⌥ and whisper"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb szeptu — trzymaj prawy ⌥ i szepcz"
+          }
+        }
+      }
+    },
+    "Typ %@ · %@ · obsługiwany": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type %@ · %@ · supported"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typ %@ · %@ · obsługiwany"
+          }
+        }
+      }
+    },
+    "Typ modelu „%@” nie jest obsługiwany przez MLX Swift.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MLX Swift does not support the model type “%@”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typ modelu „%@” nie jest obsługiwany przez MLX Swift."
+          }
+        }
+      }
+    },
+    "Tłumacz dyktowanie na": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate dictation into"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tłumacz dyktowanie na"
+          }
+        }
+      }
+    },
+    "Tłumaczenie i porządkowanie tekstu · opcjonalny": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translating and tidying text · optional"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tłumaczenie i porządkowanie tekstu · opcjonalny"
+          }
+        }
+      }
+    },
+    "Tłumaczę…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translating…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tłumaczę…"
+          }
+        }
+      }
+    },
+    "Uruchamiaj przy logowaniu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at login"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uruchamiaj przy logowaniu"
+          }
+        }
+      }
+    },
+    "Uruchom ponownie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uruchom ponownie"
+          }
+        }
+      }
+    },
+    "Ustawienia, licznik słów i pamięć podręczna": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings, word counter and cache"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia, licznik słów i pamięć podręczna"
+          }
+        }
+      }
+    },
+    "Ustawienia…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia…"
+          }
+        }
+      }
+    },
+    "Usuń": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń"
+          }
+        }
+      }
+    },
+    "Usuń model": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Model"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń model"
+          }
+        }
+      }
+    },
+    "Usuń regułę": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove rule"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń regułę"
+          }
+        }
+      }
+    },
+    "Usuń zaznaczone": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Selected"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń zaznaczone"
+          }
+        }
+      }
+    },
+    "VoiceAI jest w Koszu. Usunąć też jego dane?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI is in the Trash. Remove its data too?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI jest w Koszu. Usunąć też jego dane?"
+          }
+        }
+      }
+    },
+    "VoiceAI — Dziennik": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI — Journal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI — Dziennik"
+          }
+        }
+      }
+    },
+    "VoiceAI — Ustawienia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI — Settings"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI — Ustawienia"
+          }
+        }
+      }
+    },
+    "W kolejce: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W kolejce: %lld"
+          }
+        }
+      }
+    },
+    "W pliku nie ma ścieżki dźwiękowej.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file has no audio track."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W pliku nie ma ścieżki dźwiękowej."
+          }
+        }
+      }
+    },
+    "Wczytuję model Whisper…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading the Whisper model…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wczytuję model Whisper…"
+          }
+        }
+      }
+    },
+    "Wczytuję…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wczytuję…"
+          }
+        }
+      }
+    },
+    "Whisper nie usłyszał w pliku mowy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper heard no speech in the file."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper nie usłyszał w pliku mowy."
+          }
+        }
+      }
+    },
+    "Wielka litera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capital letter"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wielka litera"
+          }
+        }
+      }
+    },
+    "Wszystko, co VoiceAI zapisuje, leży w tym jednym folderze. Whisper pobiera się tu przy pierwszym uruchomieniu, model językowy — dopiero na żądanie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything VoiceAI saves is in this one folder. Whisper downloads here on first launch, the language model only when you ask for it."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko, co VoiceAI zapisuje, leży w tym jednym folderze. Whisper pobiera się tu przy pierwszym uruchomieniu, model językowy — dopiero na żądanie."
+          }
+        }
+      }
+    },
+    "Wybierz folder z dysku…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a Folder on Disk…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz folder z dysku…"
+          }
+        }
+      }
+    },
+    "Wygląd": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Style"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wygląd"
+          }
+        }
+      }
+    },
+    "Własne zamiany słów dla aplikacji dopiszesz w słowniku, w sekcji „aplikacje”.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your own word swaps for an app in the word list, under “aplikacje”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Własne zamiany słów dla aplikacji dopiszesz w słowniku, w sekcji „aplikacje”."
+          }
+        }
+      }
+    },
+    "Włącz Dostępność (wklejanie i klawisz)…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On Accessibility (Pasting and the Key)…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz Dostępność (wklejanie i klawisz)…"
+          }
+        }
+      }
+    },
+    "Włącz mikrofon…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On Microphone…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz mikrofon…"
+          }
+        }
+      }
+    },
+    "Zakończ VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit VoiceAI"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ VoiceAI"
+          }
+        }
+      }
+    },
+    "Zalecany — %@, nie pobrany": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended — %@, not downloaded"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zalecany — %@, nie pobrany"
+          }
+        }
+      }
+    },
+    "Zapisane w dzienniku": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to the journal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisane w dzienniku"
+          }
+        }
+      }
+    },
+    "Zapisuj też jako plik na biurku": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also save as a file on the desktop"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisuj też jako plik na biurku"
+          }
+        }
+      }
+    },
+    "Zaznaczone pliki trafią do Kosza — do czasu jego opróżnienia da się je przywrócić.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The selected files go to the Trash — you can put them back until it is emptied."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznaczone pliki trafią do Kosza — do czasu jego opróżnienia da się je przywrócić."
+          }
+        }
+      }
+    },
+    "Zostaw dane": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep Data"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zostaw dane"
+          }
+        }
+      }
+    },
+    "rozpoznawanie mowy i modele językowe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "speech recognition and language models"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rozpoznawanie mowy i modele językowe"
+          }
+        }
+      }
+    },
+    "z dysku": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "from disk"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "z dysku"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
