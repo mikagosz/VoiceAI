@@ -469,18 +469,18 @@
         }
       }
     },
-    "Gotowy — trzymaj prawy ⌥ i mów": {
+    "Gotowy — trzymaj %@ i mów": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ready — hold right ⌥ and speak"
+            "value": "Ready — hold %@ and speak"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gotowy — trzymaj prawy ⌥ i mów"
+            "value": "Gotowy — trzymaj %@ i mów"
           }
         }
       }
@@ -625,6 +625,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Język programu"
+          }
+        }
+      }
+    },
+    "Klawisz dyktowania": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictation key"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawisz dyktowania"
           }
         }
       }
@@ -1829,18 +1845,34 @@
         }
       }
     },
-    "Tryb szeptu — trzymaj prawy ⌥ i szepcz": {
+    "Tryb szeptu — trzymaj %@ i szepcz": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Whisper mode — hold right ⌥ and whisper"
+            "value": "Whisper mode — hold %@ and whisper"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tryb szeptu — trzymaj prawy ⌥ i szepcz"
+            "value": "Tryb szeptu — trzymaj %@ i szepcz"
+          }
+        }
+      }
+    },
+    "Trzymasz klawisz — nagrywa, puszczasz — tekst trafia na miejsce kursora. Inny klawisz wciśnięty w tym czasie anuluje. Dla fn ustaw w Ustawieniach systemowych → Klawiatura „Naciśnij klawisz fn, aby” na „Nic”, inaczej macOS otworzy emoji albo swoje dyktowanie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold the key to record, let go and the text lands at the cursor. Any other key pressed meanwhile cancels. For fn, set System Settings → Keyboard “Press fn key to” to “Do Nothing”, or macOS opens emoji or its own dictation."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trzymasz klawisz — nagrywa, puszczasz — tekst trafia na miejsce kursora. Inny klawisz wciśnięty w tym czasie anuluje. Dla fn ustaw w Ustawieniach systemowych → Klawiatura „Naciśnij klawisz fn, aby” na „Nic”, inaczej macOS otworzy emoji albo swoje dyktowanie."
           }
         }
       }
@@ -2449,6 +2481,102 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zostaw dane"
+          }
+        }
+      }
+    },
+    "fn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fn"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fn"
+          }
+        }
+      }
+    },
+    "lewy ⌥": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "left ⌥"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lewy ⌥"
+          }
+        }
+      }
+    },
+    "prawy ⇧": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "right ⇧"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prawy ⇧"
+          }
+        }
+      }
+    },
+    "prawy ⌃": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "right ⌃"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prawy ⌃"
+          }
+        }
+      }
+    },
+    "prawy ⌘": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "right ⌘"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prawy ⌘"
+          }
+        }
+      }
+    },
+    "prawy ⌥": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "right ⌥"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prawy ⌥"
           }
         }
       }

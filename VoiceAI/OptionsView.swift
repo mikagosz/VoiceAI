@@ -18,6 +18,8 @@ enum Setting {
     static let tidyText = "tidyText"
     /// Look for a newer VoiceAI once a month (`Updates`).
     static let checkUpdates = "checkUpdates"
+    /// The key held for dictation, a `DictationKey` raw value (key code).
+    static let dictationKey = "dictationKey"
 }
 
 /// The "Ustawienia…" window. Changes apply right away, there is no Save button.
@@ -40,6 +42,7 @@ struct OptionsView: View {
     @State private var sizes: [String: Int64] = [:]
     @ObservedObject private var updates = Updates.shared
     @AppStorage(Setting.checkUpdates) private var checkUpdates = true
+    @AppStorage(Setting.dictationKey) private var dictationKey = DictationKey.fallback.rawValue
 
     private var voices: [AVSpeechSynthesisVoice] { Speaker.voices(for: vocabulary.current.jezyk) }
 
@@ -74,12 +77,20 @@ struct OptionsView: View {
                     }
                 }
             }
-            Section("Dyktowanie") {
+            Section {
+                Picker("Klawisz dyktowania", selection: $dictationKey) {
+                    ForEach(DictationKey.allCases, id: \.rawValue) { Text(verbatim: $0.name).tag($0.rawValue) }
+                }
                 Picker("Język mowy", selection: speechLanguage) {
                     ForEach(languages, id: \.self) { Text(Language.name(of: $0)).tag($0) }
                 }
                 Toggle("Pokazuj pasek z poziomem głosu na ekranie", isOn: $showLevelBar)
                 Toggle("Tryb szeptu", isOn: $whisperMode)
+            } header: {
+                Text("Dyktowanie")
+            } footer: {
+                Text("Trzymasz klawisz — nagrywa, puszczasz — tekst trafia na miejsce kursora. Inny klawisz wciśnięty w tym czasie anuluje. Dla fn ustaw w Ustawieniach systemowych → Klawiatura „Naciśnij klawisz fn, aby” na „Nic”, inaczej macOS otworzy emoji albo swoje dyktowanie.")
+                    .foregroundStyle(.secondary)
             }
             Section {
                 Toggle("Zapisuj też jako plik na biurku", isOn: $desktopFile)

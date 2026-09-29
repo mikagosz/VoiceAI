@@ -13,7 +13,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         case file(String, Double)
     }
 
-    /// Shorter than this is a tap on ⌥, not speech.
+    /// Shorter than this is a tap on the dictation key, not speech.
     private static let minimumSeconds = 0.3
     /// Quieter than this (RMS) is silence — Whisper would invent text for it.
     private static let silence: Float = 0.003
@@ -413,7 +413,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         switch state {
         case .loading(let fraction?): return String(localized: "Pobieram model Whisper… \(Int(fraction * 100))%")
         case .loading(nil): return String(localized: "Wczytuję model Whisper…")
-        case .ready: return whisperMode ? String(localized: "Tryb szeptu — trzymaj prawy ⌥ i szepcz") : String(localized: "Gotowy — trzymaj prawy ⌥ i mów")
+        case .ready:
+            let key = DictationKey.current.name
+            return whisperMode ? String(localized: "Tryb szeptu — trzymaj \(key) i szepcz") : String(localized: "Gotowy — trzymaj \(key) i mów")
         case .recording: return String(localized: "Nagrywam…")
         case .working: return String(localized: "Rozpoznaję…")
         case .file(let name, let fraction): return String(localized: "Przepisuję „\(shortened(name))” — \(Int(fraction * 100))%")

@@ -26,7 +26,7 @@ VoiceAI can also read Claude Code's replies aloud.
 
 | | |
 |---|---|
-| **Right ⌥ held on its own** | records while held; on release the text is recognised and pasted where the cursor is. Any other key pressed meanwhile (⌥A for „ą”, shortcuts) cancels. |
+| **Right ⌥ held on its own** | records while held; on release the text is recognised and pasted where the cursor is. Any other key pressed meanwhile (⌥A for „ą”, shortcuts) cancels. Another key — left ⌥, right ⌘, right ⌃, right ⇧ or fn — can be picked in Settings. |
 | **Level bar** | a small pill at the bottom of the screen: the app and window the text is going to, and a wave that follows your voice. Can be turned off in Settings. |
 | **Menu bar icon** | a coloured wave; lights up and follows your voice while recording, a wave runs through it while recognising, it turns night blue in whisper mode. Small or wide, picked in Settings. |
 | **Audio and video files** | menu → **Transcribe Audio or Video File…**, or drop files on the app's icon: the text lands next to the file as `.txt` and `.srt` subtitles, never over an existing file. Several files are done one after another; progress shows in the menu. Long files are read ten minutes at a time. |
@@ -54,9 +54,16 @@ memory (≈2.7 GB) after 10 minutes unused.
 
 ## Settings
 
-Menu → **Settings…**: the app language (automatic — Polish on a Polish Mac, English everywhere else — or picked by hand), the speech language Whisper listens for, the level bar, whisper mode, the icon style, reading Claude's replies
+Menu → **Settings…**: the dictation key, the app language (automatic — Polish on a Polish Mac, English everywhere else — or picked by hand), the speech language Whisper listens for, the level bar, whisper mode, the icon style, reading Claude's replies
 and the voice, per-app rules (full stop at the end, capital first letter, trailing space),
-what happens with no text field, and launch at login.
+what happens with no text field, updates, and launch at login.
+
+## Updates
+
+Once a month VoiceAI asks fractal8.eu for the newest version number — nothing else is sent. When
+there is a newer one, a window offers **Install and Restart**, **Skip This Version** or a manual
+download; the app replaces itself only after you click. Switch the check off in Settings, or ask
+now with **Check for Updates…** in the menu. Built on [ErrorUpdate](https://github.com/mikagosz/ErrorUpdate).
 
 ## Word list
 
@@ -129,8 +136,9 @@ while closed; if it is running, VoiceAI notices and asks the same question.
 ## Privacy
 
 Speech is recognised on your Mac and nothing you say leaves it. VoiceAI connects to the network
-only to download models from Hugging Face over HTTPS: Whisper on first launch, a language model
-only when you ask for one. On your Mac it:
+only to download models from Hugging Face over HTTPS (Whisper on first launch, a language model
+only when you ask for one) and, once a month unless switched off, to read the newest version number
+from fractal8.eu. On your Mac it:
 
 - records from the microphone only while the key is held,
 - puts the text on the clipboard to paste it, then puts your previous clipboard back,
