@@ -260,5 +260,36 @@ let cut = FileTranscript.quietestCut(in: loudWithPause, searchLast: 500, window:
 if !(700...720).contains(cut) { failed += 1; print("FAIL: cut at \(cut), not in the pause") }
 fileCases += 1
 
-print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases) cases" : "\(failed) failed")
+// Updates: only our download server over https; the version read from disk; the restart helper
+// waits for the process to end before it opens anything.
+var updateCases = 0
+for (address, expected) in [("https://downloads.fractal8.eu/VoiceAI/VoiceAI%200.1.39.zip", true),
+                            ("http://downloads.fractal8.eu/x.zip", false), ("https://evil.example/x.zip", false),
+                            ("file:///Applications/VoiceAI.app", false), ("https://u:p@downloads.fractal8.eu/x.zip", false)]
+    where DownloadAddress.allowed(URL(string: address)!) != expected {
+    failed += 1; print("FAIL: download address \(address)")
+}
+updateCases += 1
+let fakeApp = FileManager.default.temporaryDirectory.appending(path: "voiceai-update-\(UUID().uuidString)/VoiceAI.app")
+try? FileManager.default.createDirectory(at: fakeApp.appending(path: "Contents"), withIntermediateDirectories: true)
+try? PropertyListSerialization.data(fromPropertyList: ["CFBundleShortVersionString": "9.9.9"], format: .xml, options: 0)
+    .write(to: fakeApp.appending(path: "Contents/Info.plist"))
+if RestartAfterUpdate.versionOnDisk(fakeApp) != "9.9.9" || !RestartAfterUpdate.writablePlace(fakeApp)
+    || RestartAfterUpdate.writablePlace(fakeApp.deletingLastPathComponent()) {
+    failed += 1; print("FAIL: version on disk or writable place")
+}
+updateCases += 1
+let sleeper = Process()
+sleeper.executableURL = URL(fileURLWithPath: "/bin/sleep"); sleeper.arguments = ["1"]
+try? sleeper.run()
+let opened = fakeApp.deletingLastPathComponent().appending(path: "opened")
+try? RestartAfterUpdate.launchAfterExit(pid: sleeper.processIdentifier, app: opened, opener: "/usr/bin/touch")
+Thread.sleep(forTimeInterval: 0.4)
+let tooEarly = FileManager.default.fileExists(atPath: opened.path)
+Thread.sleep(forTimeInterval: 1.6)
+if tooEarly || !FileManager.default.fileExists(atPath: opened.path) { failed += 1; print("FAIL: restart helper early=\(tooEarly)") }
+updateCases += 1
+try? FileManager.default.removeItem(at: fakeApp.deletingLastPathComponent())
+
+print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)

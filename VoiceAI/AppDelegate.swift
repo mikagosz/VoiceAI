@@ -89,6 +89,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             object: nil, suspensionBehavior: .deliverImmediately)
 
         Uninstaller.watchForTrash()
+        Updates.shared.isBusy = { [weak self] in self?.state != .ready }
+        Updates.shared.start()
 
         AVCaptureDevice.requestAccess(for: .audio) { _ in }
         if !Paster.trusted {
@@ -464,6 +466,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(voiceMenu())
         menu.addItem(item(String(localized: "Dziennik…"), #selector(openJournal), symbol: "book.closed"))
         menu.addItem(item(String(localized: "Ustawienia…"), #selector(openOptions), symbol: "gearshape"))
+        menu.addItem(item(String(localized: "Sprawdź aktualizacje…"), #selector(checkUpdates)))
         menu.addItem(.separator())
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
         menu.addItem(disabled("VoiceAI \(version)"))
@@ -623,6 +626,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc private func toggleReadReplies() {
         readReplies.toggle()
         if !readReplies { speaker.stop() }
+    }
+
+    @objc private func checkUpdates() {
+        Task { await Updates.shared.check(manually: true) }
     }
 
     @objc private func retryModel() {

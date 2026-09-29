@@ -11,6 +11,7 @@
 		D30000000000000000000F1B /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = D30000000000000000000F3B /* MLXLLM */; };
 		D30000000000000000000F1C /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = D30000000000000000000F3C /* MLXLMCommon */; };
 		D30000000000000000000F1D /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = D30000000000000000000F3D /* Tokenizers */; };
+		D30000000000000000000F1E /* ErrorUpdate in Frameworks */ = {isa = PBXBuildFile; productRef = D30000000000000000000F3E /* ErrorUpdate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 				D30000000000000000000F1B /* MLXLLM in Frameworks */,
 				D30000000000000000000F1C /* MLXLMCommon in Frameworks */,
 				D30000000000000000000F1D /* Tokenizers in Frameworks */,
+				D30000000000000000000F1E /* ErrorUpdate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +82,7 @@
 				D30000000000000000000F3B /* MLXLLM */,
 				D30000000000000000000F3C /* MLXLMCommon */,
 				D30000000000000000000F3D /* Tokenizers */,
+				D30000000000000000000F3E /* ErrorUpdate */,
 			);
 			productName = VoiceAI;
 			productReference = D3000000000000000000003A /* VoiceAI.app */;
@@ -115,6 +118,7 @@
 				D30000000000000000000F2B /* XCRemoteSwiftPackageReference "mlx-swift-lm" */,
 				D30000000000000000000F2D /* XCRemoteSwiftPackageReference "swift-transformers" */,
 				D30000000000000000000F2E /* XCRemoteSwiftPackageReference "swift-collections" */,
+				D30000000000000000000F2F /* XCRemoteSwiftPackageReference "ErrorUpdate" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D3000000000000000000006A /* Products */;
@@ -241,7 +245,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoiceAI.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -255,7 +259,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.38;
+				MARKETING_VERSION = 0.1.39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikagosz.VoiceAI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -272,7 +276,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoiceAI.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -286,7 +290,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.38;
+				MARKETING_VERSION = 0.1.39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikagosz.VoiceAI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -318,6 +322,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D30000000000000000000F2F /* XCRemoteSwiftPackageReference "ErrorUpdate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikagosz/ErrorUpdate.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		D30000000000000000000F2A /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/argmaxinc/WhisperKit.git";
@@ -353,6 +365,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D30000000000000000000F3E /* ErrorUpdate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D30000000000000000000F2F /* XCRemoteSwiftPackageReference "ErrorUpdate" */;
+			productName = ErrorUpdate;
+		};
 		D30000000000000000000F3A /* WhisperKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D30000000000000000000F2A /* XCRemoteSwiftPackageReference "WhisperKit" */;

@@ -31,7 +31,9 @@ enum Uninstaller {
             Item(title: String(localized: "Dziennik"), detail: "dziennik.json", urls: [data.appending(path: "dziennik.json")]),
             Item(title: String(localized: "Ustawienia, licznik słów i pamięć podręczna"), detail: bundleID,
                  urls: [library.appending(path: "Caches/\(bundleID)"), library.appending(path: "HTTPStorages/\(bundleID)"),
-                        ClaudeHook.replyFile],
+                        ClaudeHook.replyFile,
+                        // ErrorUpdate's report store (reporting is off, the folder is still created).
+                        library.appending(path: "Application Support/\(bundleID)")],
                  removesSettings: true),
         ].filter { item in item.removesSettings || item.urls.contains { FileManager.default.fileExists(atPath: $0.path) } }
     }

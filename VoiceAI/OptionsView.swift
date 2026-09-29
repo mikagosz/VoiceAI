@@ -16,6 +16,8 @@ enum Setting {
     /// Language code the dictation is translated into; empty = no translation.
     static let translateTo = "translateTo"
     static let tidyText = "tidyText"
+    /// Look for a newer VoiceAI once a month (`Updates`).
+    static let checkUpdates = "checkUpdates"
 }
 
 /// The "Ustawienia…" window. Changes apply right away, there is no Save button.
@@ -36,6 +38,8 @@ struct OptionsView: View {
     private let runningInterface = Language.chosenInterface ?? Self.automatic
     private static let automatic = "auto"
     @State private var sizes: [String: Int64] = [:]
+    @ObservedObject private var updates = Updates.shared
+    @AppStorage(Setting.checkUpdates) private var checkUpdates = true
 
     private var voices: [AVSpeechSynthesisVoice] { Speaker.voices(for: vocabulary.current.jezyk) }
 
@@ -228,6 +232,20 @@ struct OptionsView: View {
             }
             .task(id: textModel.installed.map(\.id)) { measureSizes() }
             Section {
+                Toggle("Sprawdzaj aktualizacje raz w miesiącu", isOn: $checkUpdates)
+                    .onChange(of: checkUpdates) { _, on in updates.enabled = on }
+                HStack {
+                    Text(lastCheckText).foregroundStyle(.secondary)
+                    Spacer()
+                    Button("Sprawdź teraz") { Task { await updates.check(manually: true) } }
+                }
+            } header: {
+                Text("Aktualizacje")
+            } footer: {
+                Text("Program pyta stronę fractal8.eu o numer najnowszej wersji — nic więcej nie wysyła. Nowa wersja instaluje się dopiero, gdy klikniesz „Zainstaluj”.")
+                    .foregroundStyle(.secondary)
+            }
+            Section {
                 Toggle("Uruchamiaj przy logowaniu", isOn: $launchAtLogin)
                     .onChange(of: launchAtLogin) { _, on in
                         do {
@@ -269,6 +287,11 @@ struct OptionsView: View {
             list.append(Model(folder: folder, name: entry.name, role: "Tłumaczenie i porządkowanie tekstu · opcjonalny"))
         }
         return list
+    }
+
+    private var lastCheckText: String {
+        guard let date = updates.lastCheck else { return String(localized: "Jeszcze nie sprawdzano") }
+        return String(localized: "Ostatnio: \(date.formatted(date: .abbreviated, time: .shortened))")
     }
 
     private var textModelStatus: String {
