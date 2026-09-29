@@ -30,8 +30,16 @@ final class Speaker {
         stop()
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice(for: language) ?? AVSpeechSynthesisVoice(language: language)
+        utterance.rate = SpeechTuning.rate
+        utterance.pitchMultiplier = SpeechTuning.pitch
+        utterance.volume = SpeechTuning.volume
         log.info("Speaking with voice \(utterance.voice?.identifier ?? "nil", privacy: .public), \(text.count) characters")
         synthesizer.speak(utterance)
+    }
+
+    /// A short sentence in the picked voice and settings, so a change is heard right away.
+    func sample(language: String) {
+        speak(language == "pl" ? "Cześć, tak brzmi mój głos." : "Hi, this is how my voice sounds.", language: language)
     }
 
     func stop() {

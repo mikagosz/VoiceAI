@@ -35,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private let live = LivePanel()
     private var meter: Timer?
     private let speaker = Speaker()
-    @MainActor private lazy var options = OptionsWindow(vocabulary: vocabulary, textModel: textModel)
+    @MainActor private lazy var options = OptionsWindow(vocabulary: vocabulary, textModel: textModel, speaker: speaker)
     private var whisperMode: Bool {
         get { UserDefaults.standard.bool(forKey: Setting.whisperMode) }
         set { UserDefaults.standard.set(newValue, forKey: Setting.whisperMode) }
@@ -617,8 +617,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc private func pickVoice(_ sender: NSMenuItem) {
         guard let identifier = sender.representedObject as? String else { return }
         speaker.pick(identifier)
-        let language = vocabulary.current.jezyk
-        speaker.speak(language == "pl" ? "Cześć, tak brzmi mój głos." : "Hi, this is how my voice sounds.", language: language)
+        speaker.sample(language: vocabulary.current.jezyk)
     }
 
     @objc private func openSpokenContent() {

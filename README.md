@@ -55,7 +55,7 @@ memory (≈2.7 GB) after 10 minutes unused.
 ## Settings
 
 Menu → **Settings…**: the dictation key, the app language (automatic — Polish on a Polish Mac, English everywhere else — or picked by hand), the speech language Whisper listens for, the level bar, whisper mode, the icon style, reading Claude's replies
-and the voice, per-app rules (full stop at the end, capital first letter, trailing space),
+and the voice with its speed, pitch and volume, per-app rules (full stop at the end, capital first letter, trailing space),
 what happens with no text field, updates, and launch at login.
 
 ## Updates
@@ -79,8 +79,8 @@ the last good version stays in use and the menu says so.
 ## Reading Claude Code's replies
 
 Optional. A `Stop` hook in `~/.claude/settings.json` hands every reply to VoiceAI, which reads its first
-two sentences aloud with the best Polish system voice (pick another in Settings; better voices
-download in VoiceOver Utility → Speech → Voice → Customize). Pressing right ⌥ cuts the voice off.
+two sentences aloud with the best Polish system voice (pick another, and its speed, pitch and volume, in Settings; better voices
+download in VoiceOver Utility → Speech → Voice → Customize). Pressing the dictation key cuts the voice off.
 
 ```json
 "Stop": [{ "hooks": [{ "type": "command", "command": "/Applications/VoiceAI.app/Contents/MacOS/VoiceAI --claude-hook", "timeout": 5 }] }]

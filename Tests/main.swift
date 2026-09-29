@@ -291,5 +291,27 @@ if tooEarly || !FileManager.default.fileExists(atPath: opened.path) { failed += 
 updateCases += 1
 try? FileManager.default.removeItem(at: fakeApp.deletingLastPathComponent())
 
-print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases) cases" : "\(failed) failed")
+// Reader sliders: nothing stored → normal; out of range or not a number → kept inside the slider.
+var tuningCases = 0
+let tuningSuite = UserDefaults(suiteName: FileManager.default.temporaryDirectory.appending(path: "voiceai-tuning-\(UUID().uuidString)").path)!
+func tuned(_ value: Any?) -> Double {
+    if let value { tuningSuite.set(value, forKey: SpeechTuning.rateKey) } else { tuningSuite.removeObject(forKey: SpeechTuning.rateKey) }
+    return SpeechTuning.stored(SpeechTuning.rateKey, SpeechTuning.normalRate, SpeechTuning.rateRange, in: tuningSuite)
+}
+for (input, expected) in [(nil, 0.5), (0.6, 0.6), (5.0, 0.7), (-1.0, 0.3), (Double.nan, 0.5)] as [(Double?, Double)] {
+    let result = tuned(input)
+    if result != expected { failed += 1; print("FAIL: speech rate \(String(describing: input)) → \(result), expected \(expected)") }
+    tuningCases += 1
+}
+if tuned("szybko") != 0.5 { failed += 1; print("FAIL: speech rate from a string") }
+tuningCases += 1
+for range in [SpeechTuning.rateRange, SpeechTuning.pitchRange, SpeechTuning.volumeRange] where range.lowerBound <= 0 {
+    failed += 1; print("FAIL: slider range \(range) reaches silence or a standstill")
+}
+if !SpeechTuning.rateRange.contains(SpeechTuning.normalRate) || !SpeechTuning.pitchRange.contains(SpeechTuning.normalPitch)
+    || !SpeechTuning.volumeRange.contains(SpeechTuning.normalVolume) { failed += 1; print("FAIL: normal value outside its slider") }
+if SpeechTuning.percent(0.6, of: 0.5) != "120 %" || SpeechTuning.percent(1.0, of: 1.0) != "100 %" { failed += 1; print("FAIL: slider percent") }
+tuningCases += 3
+
+print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)

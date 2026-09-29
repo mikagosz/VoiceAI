@@ -26,6 +26,11 @@ enum Setting {
 struct OptionsView: View {
     @ObservedObject var vocabulary: VocabularyStore
     @ObservedObject var textModel: TextModel
+    /// The app's one reader — a sample after a slider moves must not talk over a reply.
+    let speaker: Speaker
+    @AppStorage(SpeechTuning.rateKey) private var speechRate = SpeechTuning.normalRate
+    @AppStorage(SpeechTuning.pitchKey) private var speechPitch = SpeechTuning.normalPitch
+    @AppStorage(SpeechTuning.volumeKey) private var speechVolume = SpeechTuning.normalVolume
     @AppStorage(Setting.translateTo) private var translateTo = ""
     @AppStorage(Setting.tidyText) private var tidyText = false
     @AppStorage(Setting.showLevelBar) private var showLevelBar = true
@@ -123,6 +128,25 @@ struct OptionsView: View {
                     Picker("Głos", selection: $voice) {
                         // The system name already carries the quality: "Krzysztof (rozszerzony)".
                         ForEach(voices, id: \.identifier) { Text($0.name).tag($0.identifier) }
+                    }
+                    .disabled(!readReplies)
+                    tuningSlider("Tempo", value: $speechRate, in: SpeechTuning.rateRange,
+                                 normal: SpeechTuning.normalRate, low: "tortoise", high: "hare")
+                    tuningSlider("Wysokość tonu", value: $speechPitch, in: SpeechTuning.pitchRange,
+                                 normal: SpeechTuning.normalPitch, low: "arrow.down", high: "arrow.up")
+                    tuningSlider("Głośność", value: $speechVolume, in: SpeechTuning.volumeRange,
+                                 normal: SpeechTuning.normalVolume, low: "speaker.wave.1", high: "speaker.wave.3")
+                    HStack {
+                        Button("Posłuchaj") { speaker.sample(language: vocabulary.current.jezyk) }
+                        Spacer()
+                        Button("Przywróć domyślne") {
+                            speechRate = SpeechTuning.normalRate
+                            speechPitch = SpeechTuning.normalPitch
+                            speechVolume = SpeechTuning.normalVolume
+                            speaker.sample(language: vocabulary.current.jezyk)
+                        }
+                        .disabled(speechRate == SpeechTuning.normalRate && speechPitch == SpeechTuning.normalPitch
+                                  && speechVolume == SpeechTuning.normalVolume)
                     }
                     .disabled(!readReplies)
                 }
@@ -333,6 +357,29 @@ struct OptionsView: View {
         NSApp.terminate(nil)
     }
 
+    /// One of the reader's sliders; letting go reads a sample in the new setting.
+    private func tuningSlider(_ title: LocalizedStringKey, value: Binding<Double>, in range: ClosedRange<Double>,
+                              normal: Double, low: String, high: String) -> some View {
+        LabeledContent(title) {
+            HStack {
+                Slider(value: value, in: range) {
+                    Text(title)
+                } minimumValueLabel: {
+                    Image(systemName: low)
+                } maximumValueLabel: {
+                    Image(systemName: high)
+                } onEditingChanged: { editing in
+                    if !editing { speaker.sample(language: vocabulary.current.jezyk) }
+                }
+                .labelsHidden()
+                Text(verbatim: SpeechTuning.percent(value.wrappedValue, of: normal))
+                    .monospacedDigit().foregroundStyle(.secondary)
+                    .frame(width: 48, alignment: .trailing)
+            }
+        }
+        .disabled(!readReplies)
+    }
+
     /// Show the voice actually in use when none of this language was picked yet.
     private func showVoiceInUse() {
         if !voices.contains(where: { $0.identifier == voice }), let best = voices.first { voice = best.identifier }
@@ -363,16 +410,18 @@ final class OptionsWindow {
     private var window: NSWindow?
     private let vocabulary: VocabularyStore
     private let textModel: TextModel
+    private let speaker: Speaker
 
-    init(vocabulary: VocabularyStore, textModel: TextModel) {
+    init(vocabulary: VocabularyStore, textModel: TextModel, speaker: Speaker) {
         self.vocabulary = vocabulary
         self.textModel = textModel
+        self.speaker = speaker
     }
 
     func show() {
         vocabulary.reload()
         if window == nil {
-            let host = NSHostingController(rootView: OptionsView(vocabulary: vocabulary, textModel: textModel))
+            let host = NSHostingController(rootView: OptionsView(vocabulary: vocabulary, textModel: textModel, speaker: speaker))
             // The window must not grow to the form's full height — it went under the Dock.
             host.sizingOptions = [.minSize]
             let window = NSWindow(contentViewController: host)
