@@ -207,6 +207,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// cut at pauses together (0.1.3) read worse on a real voice than on the test voice.
     private func finishRecording() {
         guard state == .recording else { return }
+        let released = Date() // TEMPORARY timing (speed work 2026-10-01) — remove with the other "TEMPORARY timing" lines
         var samples = recorder.stop()
         stopMeter()
         let seconds = Date().timeIntervalSince(recordingStarted)
@@ -239,8 +240,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 state = .ready
             }
             do {
+                let startWhisper = Date() // TEMPORARY timing
                 let raw = try await transcriber.transcribe(samples, vocabulary: words)
+                let startRefine = Date() // TEMPORARY timing
                 let processed = await refine(words.apply(to: raw), language: words.jezyk)
+                let refined = Date() // TEMPORARY timing
                 let text = noTextField ? processed : words.finish(processed, for: app)
                 guard !text.isEmpty else { return }
                 remember(text)
@@ -254,6 +258,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 } else if !Paster.paste(text) {
                     NSSound.beep()
                 }
+                // TEMPORARY timing — one line per dictation, read with `log show`.
+                let done = Date()
+                let tidy = UserDefaults.standard.bool(forKey: Setting.tidyText)
+                log.notice("TIMING recorded \(seconds, format: .fixed(precision: 1), privacy: .public) s, \(text.count, privacy: .public) chars | stop \(startWhisper.timeIntervalSince(released), format: .fixed(precision: 2), privacy: .public) | whisper \(startRefine.timeIntervalSince(startWhisper), format: .fixed(precision: 2), privacy: .public) | language model \(refined.timeIntervalSince(startRefine), format: .fixed(precision: 2), privacy: .public) (tidy=\(tidy, privacy: .public), model=\(self.textModel.isDownloaded, privacy: .public)) | paste \(done.timeIntervalSince(refined), format: .fixed(precision: 2), privacy: .public) | total \(done.timeIntervalSince(released), format: .fixed(precision: 2), privacy: .public)")
             } catch {
                 log.error("Dictation failed: \(error.localizedDescription, privacy: .public)")
                 NSSound.beep()
