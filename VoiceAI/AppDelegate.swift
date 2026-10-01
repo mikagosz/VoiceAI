@@ -169,7 +169,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // and records silence (measured on the Mac mini, 0.1.64), so the wave showed and the
         // no-microphone message from 0.1.59 never came up. Ask Core Audio before starting.
         if Microphone.defaultInputName() == nil {
-            flash(String(localized: "Brak mikrofonu — podłącz go albo wybierz w Ustawieniach dźwięku"))
+            flash(String(localized: "Brak mikrofonu"), symbol: "mic.slash")
             return
         }
         do {
@@ -202,10 +202,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     /// A short message in the level bar's place, with a sound — for a key press that cannot record.
-    private func flash(_ text: String) {
+    private func flash(_ text: String, symbol: String? = nil) {
         NSSound.beep()
         live.target(Paster.destination)
-        live.working(text)
+        if let symbol { live.alert(text, symbol: symbol) } else { live.working(text) }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self, self.state != .recording else { return }
             if case .working = self.state { return }

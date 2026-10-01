@@ -112,7 +112,31 @@ final class LivePanel {
     }
 
     func working(_ text: String = String(localized: "Rozpoznaję…")) {
+        label.textColor = .secondaryLabelColor
         label.stringValue = text
+        wave.isHidden = true
+        label.isHidden = false
+        show()
+    }
+
+    /// A warning in the wave's place: a red symbol and red text — no microphone (0.1.66).
+    func alert(_ text: String, symbol: String) {
+        let line = NSMutableAttributedString()
+        let config = NSImage.SymbolConfiguration(pointSize: 13, weight: .medium)
+            .applying(.init(paletteColors: [.systemRed]))
+        if let image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)?
+            .withSymbolConfiguration(config) {
+            let attachment = NSTextAttachment()
+            attachment.image = image
+            line.append(NSAttributedString(attachment: attachment))
+            line.append(NSAttributedString(string: " "))
+        }
+        line.append(NSAttributedString(string: text))
+        let centered = NSMutableParagraphStyle()
+        centered.alignment = .center
+        line.addAttributes([.foregroundColor: NSColor.systemRed, .font: label.font as Any,
+                            .paragraphStyle: centered], range: NSRange(location: 0, length: line.length))
+        label.attributedStringValue = line
         wave.isHidden = true
         label.isHidden = false
         show()
