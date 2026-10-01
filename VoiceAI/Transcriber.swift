@@ -51,7 +51,7 @@ final class Transcriber {
         guard let whisper else { return "" }
         let prompt = vocabulary.prompt
         let promptTokens = prompt.isEmpty ? nil : whisper.tokenizer?.encode(text: prompt)
-        let options = DecodingOptions(
+        var options = DecodingOptions(
             language: vocabulary.jezyk,
             usePrefillPrompt: true,
             detectLanguage: false,
@@ -60,6 +60,10 @@ final class Transcriber {
             promptTokens: promptTokens,
             chunkingStrategy: .vad
         )
+        // One retry at most, not WhisperKit's five: each retry decodes the whole text again at a
+        // higher temperature, and 2 of 12 dictations (2026-10-01) went through all five — 7–8 s
+        // instead of ~1.5 s after the key was released. Files keep the default, nobody waits on them.
+        options.temperatureFallbackCount = 1
         let text = try await text(of: samples, options: options, whisper: whisper)
         guard Language.wrongScript(text, language: vocabulary.jezyk) else { return text }
         // A Latin-script language came back in another alphabet. Whisper's retries sample at
