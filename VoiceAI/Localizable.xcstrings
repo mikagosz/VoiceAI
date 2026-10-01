@@ -2692,6 +2692,134 @@
           }
         }
       }
+    },
+    "Inny głos (polecenie)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other Voice (Command)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inny głos (polecenie)"
+          }
+        }
+      }
+    },
+    "Polecenie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Command"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenie"
+          }
+        }
+      }
+    },
+    "Nie wybrano": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None chosen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wybrano"
+          }
+        }
+      }
+    },
+    "Wybierz…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz…"
+          }
+        }
+      }
+    },
+    "Wybierz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz"
+          }
+        }
+      }
+    },
+    "Program dostaje wiersz „język⇥tekst” i odpowiada ścieżką do pliku WAV. Gdy zawiedzie, czyta głos systemowy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The program gets a line “language⇥text” and answers with the path to a WAV file. If it fails, the system voice reads instead."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Program dostaje wiersz „język⇥tekst” i odpowiada ścieżką do pliku WAV. Gdy zawiedzie, czyta głos systemowy."
+          }
+        }
+      }
+    },
+    "Tego pliku nie da się uruchomić": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file can’t be run"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tego pliku nie da się uruchomić"
+          }
+        }
+      }
+    },
+    "Nadaj mu prawo uruchamiania: chmod +x w Terminalu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make it executable first: chmod +x in Terminal."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nadaj mu prawo uruchamiania: chmod +x w Terminalu."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

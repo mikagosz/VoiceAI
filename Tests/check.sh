@@ -3,5 +3,5 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 OUT="$(mktemp -d)/check"
-swiftc -o "$OUT" VoiceAI/Vocabulary.swift VoiceAI/ClaudeHook.swift VoiceAI/Recorder.swift VoiceAI/Paster.swift VoiceAI/Journal.swift VoiceAI/Stats.swift VoiceAI/FileTranscript.swift VoiceAI/Language.swift VoiceAI/UpdateSupport.swift VoiceAI/SpeechTuning.swift Tests/main.swift -module-name Check -suppress-warnings 2>&1 | grep -v "^$" || true
+swiftc -o "$OUT" VoiceAI/Vocabulary.swift VoiceAI/ClaudeHook.swift VoiceAI/Recorder.swift VoiceAI/Paster.swift VoiceAI/Journal.swift VoiceAI/Stats.swift VoiceAI/FileTranscript.swift VoiceAI/Language.swift VoiceAI/UpdateSupport.swift VoiceAI/SpeechTuning.swift VoiceAI/VoiceCommand.swift Tests/main.swift -module-name Check -suppress-warnings 2>&1 | grep -v "^$" || true
 "$OUT"
