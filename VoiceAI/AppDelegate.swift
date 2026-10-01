@@ -590,12 +590,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func voiceMenu() -> NSMenuItem {
         let submenu = NSMenu()
         let language = vocabulary.current.jezyk
-        let current = speaker.voice(for: language)?.identifier
+        let usesCommand = UserDefaults.standard.string(forKey: Setting.voice) == VoiceCommand.tag && VoiceCommand.path() != nil
+        let current = usesCommand ? VoiceCommand.tag : speaker.voice(for: language)?.identifier
         for voice in Speaker.voices(for: language) {
             // The system name already carries the quality: "Krzysztof (rozszerzony)".
             let entry = item(voice.name, #selector(pickVoice(_:)))
             entry.representedObject = voice.identifier
             entry.state = voice.identifier == current ? .on : .off
+            submenu.addItem(entry)
+        }
+        if VoiceCommand.path() != nil {
+            submenu.addItem(.separator())
+            let entry = item(String(localized: "Inny głos (polecenie)"), #selector(pickVoice(_:)))
+            entry.representedObject = VoiceCommand.tag
+            entry.state = usesCommand ? .on : .off
             submenu.addItem(entry)
         }
         submenu.addItem(.separator())
