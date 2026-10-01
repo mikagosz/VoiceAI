@@ -18,6 +18,10 @@ list keeps names spelled right, a whisper mode picks up very quiet speech, and d
 made with no text field in focus go to the app's own journal instead of being lost.
 VoiceAI can also read Claude Code's replies aloud.
 
+<p align="center">
+  <img src="docs/assets/voiceai-level-bar.png" width="484" alt="VoiceAI's level bar: where the text will go, and a wave that follows your voice">
+</p>
+
 > The interface is in Polish and English — it follows the Mac, or is picked in Settings.
 
 ---
