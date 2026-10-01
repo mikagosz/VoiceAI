@@ -89,7 +89,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             object: nil, suspensionBehavior: .deliverImmediately)
 
         Uninstaller.watchForTrash()
-        Updates.shared.isBusy = { [weak self] in self?.state != .ready }
+        // Busy only while recording, recognising or transcribing a file — a model that failed to
+        // load must not block the update that might fix it.
+        Updates.shared.isBusy = { [weak self] in
+            switch self?.state {
+            case .recording, .working, .file: true
+            default: false
+            }
+        }
         Updates.shared.start()
 
         AVCaptureDevice.requestAccess(for: .audio) { _ in }

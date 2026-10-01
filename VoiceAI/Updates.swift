@@ -115,7 +115,9 @@ final class Updates: ObservableObject, ErrorUpdateDelegate {
     func check(manually: Bool) async {
         if !manually && !enabled { return }
         lastError = nil
-        await ErrorUpdateManager.shared.checkForUpdates(force: true)
+        // Not forced for the monthly check: only then does the package honour "Skip This Version"
+        // and its guard against offering an update that already installed without effect.
+        await ErrorUpdateManager.shared.checkForUpdates(force: manually)
         guard let info = ErrorUpdateManager.shared.availableUpdate else {
             available = nil
             install = .idle
@@ -129,6 +131,16 @@ final class Updates: ObservableObject, ErrorUpdateDelegate {
         checkError = nil
         if available?.latestVersion != info.latestVersion { install = .idle }
         available = info
+        if manually { showWindow() } else { await showWhenIdle() }
+    }
+
+    /// The monthly check never pops up mid-dictation: the window takes focus, and the ⌘V that
+    /// follows the key's release would land in it instead of the text field.
+    private func showWhenIdle() async {
+        while isBusy() {
+            try? await Task.sleep(for: .seconds(5))
+        }
+        guard available != nil else { return }
         showWindow()
     }
 
