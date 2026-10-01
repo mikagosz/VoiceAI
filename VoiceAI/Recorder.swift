@@ -5,7 +5,11 @@ import AVFoundation
 final class Recorder {
     static let sampleRate = 16_000.0
 
-    private let engine = AVAudioEngine()
+    /// A new engine for every recording. One engine kept for the app's lifetime remembers the
+    /// microphone format from the first time it looked; after the input changes (another mic, or a
+    /// Bluetooth headset switching between 24 and 48 kHz) the tap gets the old format, AVFoundation
+    /// throws an Objective-C exception Swift cannot catch, and the key stays dead until a restart.
+    private var engine: AVAudioEngine?
     private let lock = NSLock()
     private var samples: [Float] = []
     private var lastLevel: Float = 0
@@ -15,8 +19,16 @@ final class Recorder {
             samples = []
             lastLevel = 0
         }
+        stopEngine()
+        let engine = AVAudioEngine()
+        self.engine = engine
         let input = engine.inputNode
         let inFormat = input.outputFormat(forBus: 0)
+        // No input device at all: the format comes back empty, and a tap on it would throw.
+        guard inFormat.sampleRate > 0, inFormat.channelCount > 0 else {
+            self.engine = nil
+            throw RecorderError.noMicrophone
+        }
         guard let outFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: Self.sampleRate,
                                             channels: 1, interleaved: false),
               let converter = AVAudioConverter(from: inFormat, to: outFormat) else {
@@ -44,9 +56,16 @@ final class Recorder {
         do {
             try engine.start()
         } catch {
-            input.removeTap(onBus: 0)
+            stopEngine()
             throw error
         }
+    }
+
+    private func stopEngine() {
+        guard let engine else { return }
+        engine.inputNode.removeTap(onBus: 0)
+        engine.stop()
+        self.engine = nil
     }
 
     /// Loudness (RMS) of the latest chunk from the microphone — for the level bar.
@@ -66,8 +85,7 @@ final class Recorder {
 
     /// Stops the microphone and hands back everything recorded since start().
     func stop() -> [Float] {
-        engine.inputNode.removeTap(onBus: 0)
-        engine.stop()
+        stopEngine()
         return lock.withLock { samples }
     }
 }

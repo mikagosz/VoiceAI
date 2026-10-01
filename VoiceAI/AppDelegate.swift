@@ -78,21 +78,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         key.onRelease = { [weak self] in self?.finishRecording() }
         key.onCancel = { [weak self] in self?.cancelRecording() }
         key.start()
-        // Globalne monitory zdarzeń potrafią po uśpieniu Maca cicho przestać dostarczać klawisz
-        // dyktowania — wtedy klawisz nie reaguje, choć program żyje, i pomagał dopiero restart
-        // (0.1.45, zgłoszenie [U]). Ustawiamy je ponownie po wybudzeniu i po odblokowaniu ekranu;
-        // key.start() najpierw zdejmuje stare monitory, więc powtórzenie jest bezpieczne.
-        let wake = NSWorkspace.shared.notificationCenter
-        for name in [NSWorkspace.didWakeNotification, NSWorkspace.screensDidWakeNotification,
-                     NSWorkspace.sessionDidBecomeActiveNotification] {
-            wake.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
-                MainActor.assumeIsolated { self?.key.start() }
-            }
-        }
-        DistributedNotificationCenter.default().addObserver(
-            forName: .init("com.apple.screenIsUnlocked"), object: nil, queue: .main) { [weak self] _ in
-            MainActor.assumeIsolated { self?.key.start() }
-        }
         registerLoginItemOnce()
         // The options window and the menu write the same settings; the icon follows either.
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
