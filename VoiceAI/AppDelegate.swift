@@ -435,9 +435,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         switch state {
         case .loading: mode = .loading
         case .ready:
-            // No microphone: the wave lies flat and grey, as it did until 0.1.59 turned the
-            // failed press into a message — now it shows before the key is even pressed.
-            mode = Microphone.shared.name == nil ? .failed : .idle
+            // No microphone: the resting wave dimmed — shown before the key is even pressed.
+            mode = Microphone.shared.name == nil ? .noMicrophone : .idle
         case .recording:
             mode = .active
             levels = iconLevels

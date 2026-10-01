@@ -31,7 +31,7 @@ enum IconStyle: String, CaseIterable {
 }
 
 enum StatusIcon {
-    enum Mode { case idle, loading, active, working, failed }
+    enum Mode { case idle, loading, active, working, failed, noMicrophone }
 
     static func image(style: IconStyle, mode: Mode, levels: [CGFloat], whisper: Bool) -> NSImage {
         let size = style.isPill ? NSSize(width: 34, height: 18) : NSSize(width: 18, height: 18)
@@ -101,7 +101,8 @@ enum StatusIcon {
         points.append(CGPoint(x: ends.1, y: mid))
         let wave = smoothPath(through: points)
             .copy(strokingWithWidth: style.isPill ? 1.6 : 1.35, lineCap: .round, lineJoin: .round, miterLimit: 10)
-        let alpha: CGFloat = mode == .loading ? 0.35 : 1
+        // Loading and no microphone: the usual wave, dimmed.
+        let alpha: CGFloat = mode == .loading || mode == .noMicrophone ? 0.35 : 1
         context.saveGState()
         context.addPath(wave)
         if mode == .failed || night {
