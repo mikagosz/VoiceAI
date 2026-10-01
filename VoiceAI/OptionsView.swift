@@ -131,8 +131,14 @@ struct OptionsView: View {
             Section("Odpowiedzi Claude'a") {
                 Toggle("Czytaj odpowiedzi na głos", isOn: $readReplies)
                 if voices.isEmpty {
-                    Text("Brak zainstalowanych głosów w tym języku — pobierzesz je w menu Głos.")
-                        .foregroundStyle(.secondary)
+                    HStack {
+                        Text("Brak zainstalowanych głosów w tym języku.")
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Pobierz głosy…") {
+                            NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.Accessibility-Settings.extension?SpokenContent")!)
+                        }
+                    }
                 } else {
                     Picker("Głos", selection: $voice) {
                         // The system name already carries the quality: "Krzysztof (rozszerzony)".
