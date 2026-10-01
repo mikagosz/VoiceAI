@@ -100,7 +100,7 @@ final class JournalWindow {
             window.isReleasedWhenClosed = false
             window.setContentSize(NSSize(width: 520, height: 480))
             window.center()
-            // Rozmiar i miejsce zostają między otwarciami i uruchomieniami (0.1.44, polecenie [U]).
+            // Size and place are kept between openings and launches.
             window.setFrameAutosaveName("VoiceAI.Dziennik")
             self.window = window
         }

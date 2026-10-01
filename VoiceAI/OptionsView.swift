@@ -311,7 +311,7 @@ struct OptionsView: View {
             }
         }
         .formStyle(.grouped)
-        // Szerokość od 620 w górę — do 0.1.43 stała, okna nie dało się poszerzyć.
+        // 620 or wider — until 0.1.43 the width was fixed and the window could not be widened.
         .frame(minWidth: 620, maxWidth: .infinity, minHeight: 320)
         .sheet(isPresented: $textModel.addSheetShown) { AddModelView(textModel: textModel) }
         // No model left: the switches that need one go back off.
@@ -400,8 +400,8 @@ struct OptionsView: View {
                 Slider(value: value, in: range) {
                     Text(title)
                 } minimumValueLabel: {
-                    // Stała szerokość ikon: inaczej każdy suwak zaczyna się i kończy gdzie indziej
-                    // (żółw jest szerszy od strzałki) — 0.1.42, uwaga [U] ze zrzutu.
+                    // Fixed icon width, so all three sliders start and end at the same place
+                    // (the tortoise is wider than the arrow).
                     Image(systemName: low).frame(width: 24)
                 } maximumValueLabel: {
                     Image(systemName: high).frame(width: 24)
@@ -469,7 +469,7 @@ final class OptionsWindow {
             let room = (NSScreen.main?.visibleFrame.height ?? 800) - 60
             window.setContentSize(NSSize(width: 620, height: min(680, room)))
             window.center()
-            // Rozmiar i miejsce zostają między otwarciami i uruchomieniami (0.1.44, polecenie [U]).
+            // Size and place are kept between openings and launches.
             window.setFrameAutosaveName("VoiceAI.Ustawienia")
             self.window = window
         }
