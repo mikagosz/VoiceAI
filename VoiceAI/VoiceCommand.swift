@@ -1,4 +1,3 @@
-import CryptoKit
 import Foundation
 
 /// "Inny głos (polecenie)": replies read by a program of the user's choice instead of a system
@@ -15,36 +14,11 @@ enum VoiceCommand {
     /// Path to the program.
     static let pathKey = "voiceCommand"
 
-    /// The program inherits VoiceAI's permissions (Accessibility, microphone) — macOS credits a
-    /// child process to the app that started it. The path sits in plain preferences that any
-    /// process of this user can write, and the file itself can be rewritten, so the program runs
-    /// only when the Keychain holds the user's approval for this very path and these very bytes
-    /// (`VoiceCommandApproval`, written when the program is picked in Settings).
-    struct Approval: Equatable {
-        var path: String
-        var fingerprint: String
-    }
-
-    enum Status: Equatable {
-        /// Nothing picked, or the file is gone.
-        case none
-        case ready(String)
-        /// Picked, but the path or the file is not what was approved — pick it again.
-        case changed(String)
-    }
-
-    static func status(path: String?, approval: Approval?,
-                       fingerprint: (String) -> String? = fingerprint(of:)) -> Status {
-        guard let path, !path.isEmpty, FileManager.default.isExecutableFile(atPath: path) else { return .none }
-        guard let approval, approval.path == path, let current = fingerprint(path),
-              current == approval.fingerprint else { return .changed(path) }
-        return .ready(path)
-    }
-
-    /// SHA-256 of the file's bytes.
-    static func fingerprint(of path: String) -> String? {
-        guard let data = FileManager.default.contents(atPath: path) else { return nil }
-        return SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
+    /// The chosen program while it is still there and runnable.
+    static func path(in defaults: UserDefaults = .standard) -> String? {
+        guard let path = defaults.string(forKey: pathKey), !path.isEmpty,
+              FileManager.default.isExecutableFile(atPath: path) else { return nil }
+        return path
     }
 
     /// One request line. A tab or line break inside the text would break the protocol.

@@ -113,10 +113,7 @@ enum Uninstaller {
             for url in item.urls where FileManager.default.fileExists(atPath: url.path) {
                 try? FileManager.default.trashItem(at: url, resultingItemURL: nil)
             }
-            if item.removesSettings {
-                UserDefaults.standard.removePersistentDomain(forName: bundleID)
-                VoiceCommandApproval.revoke()
-            }
+            if item.removesSettings { UserDefaults.standard.removePersistentDomain(forName: bundleID) }
         }
         // The data folder itself, once nothing is left in it.
         if (try? FileManager.default.contentsOfDirectory(atPath: data.path))?.isEmpty == true {

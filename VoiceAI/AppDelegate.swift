@@ -604,7 +604,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func voiceMenu() -> NSMenuItem {
         let submenu = NSMenu()
         let language = vocabulary.current.jezyk
-        let command = VoiceCommandApproval.readyPath
+        let command = VoiceCommand.path()
         let usesCommand = UserDefaults.standard.string(forKey: Setting.voice) == VoiceCommand.tag && command != nil
         let current = usesCommand ? VoiceCommand.tag : speaker.voice(for: language)?.identifier
         for voice in Speaker.voices(for: language) {

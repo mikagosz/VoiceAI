@@ -326,21 +326,19 @@ commandCases += 1
 expectCommand(VoiceCommand.sentences("Dzień dobry. Jak się masz? Dobrze!") == ["Dzień dobry.", "Jak się masz?", "Dobrze!"], "three sentences")
 expectCommand(VoiceCommand.sentences("bez kropki") == ["bez kropki"], "one sentence without a full stop")
 expectCommand(VoiceCommand.sentences("  \n ").isEmpty, "nothing to read")
-// The program runs only as approved: same path, same bytes (audit 2026-10-01, P1-01).
-let program = FileManager.default.temporaryDirectory.appending(path: "voiceai-check-\(UUID().uuidString).sh").path
-FileManager.default.createFile(atPath: program, contents: Data("#!/bin/sh\n".utf8), attributes: [.posixPermissions: 0o755])
-let approval = VoiceCommand.fingerprint(of: program).map { VoiceCommand.Approval(path: program, fingerprint: $0) }
-expectCommand(approval != nil, "fingerprint of a readable file")
-expectCommand(VoiceCommand.status(path: program, approval: approval) == .ready(program), "approved program is ready")
-expectCommand(VoiceCommand.status(path: program, approval: nil) == .changed(program), "no approval — does not run")
-expectCommand(VoiceCommand.status(path: program, approval: approval.map { VoiceCommand.Approval(path: "/bin/sh", fingerprint: $0.fingerprint) })
-              == .changed(program), "path swapped in preferences")
-try? Data("#!/bin/sh\necho swapped\n".utf8).write(to: URL(fileURLWithPath: program))
-expectCommand(VoiceCommand.status(path: program, approval: approval) == .changed(program), "file rewritten after approval")
-try? FileManager.default.setAttributes([.posixPermissions: 0o644], ofItemAtPath: program)
-expectCommand(VoiceCommand.status(path: program, approval: approval) == .none, "not executable")
-try? FileManager.default.removeItem(atPath: program)
-expectCommand(VoiceCommand.status(path: program, approval: approval) == .none, "file gone")
+// The voice program runs disclaimed, without VoiceAI's permissions (audit 2026-10-01, P1-01):
+// the private call must be there, and a spawned program must talk over the pipes.
+expectCommand(DisclaimedSpawn.available, "responsibility_spawnattrs_setdisclaim found")
+if let echo = try? DisclaimedSpawn.start("/bin/cat") {
+    try? echo.input.write(contentsOf: Data("pl\tRaz dwa\n".utf8))
+    try? echo.input.close()
+    let back = String(decoding: echo.output.readDataToEndOfFile(), as: UTF8.self)
+    waitpid(echo.pid, nil, 0)
+    expectCommand(back == "pl\tRaz dwa\n", "round trip through a spawned program")
+} else {
+    expectCommand(false, "spawning /bin/cat")
+}
+expectCommand((try? DisclaimedSpawn.start("/nonexistent/voice")) == nil, "a missing program is an error, not a crash")
 
 print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)

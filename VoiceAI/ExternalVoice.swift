@@ -12,8 +12,12 @@ final class ExternalVoice: ObservableObject {
 
     private let queue = DispatchQueue(label: "com.mikagosz.VoiceAI.externalVoice")
     // Owned by `queue`.
-    private var process: Process?
+    /// The running program (`DisclaimedSpawn`), 0 when none.
+    private var pid: pid_t = 0
+    private var exitWatch: DispatchSourceProcess?
     private var input: FileHandle?
+    /// Kept here: a handle nobody holds is closed on release, and its reader with it.
+    private var output: FileHandle?
     private var lines: Lines?
     private var runningPath: String?
 
@@ -41,12 +45,12 @@ final class ExternalVoice: ObservableObject {
     /// English, the language a speech engine is most likely to know.
     func warmUp(_ command: String) {
         queue.async {
-            if let process = self.process, process.isRunning, self.runningPath == command { return }
+            if self.isRunning, self.runningPath == command { return }
             DispatchQueue.main.async { self.state = .loading }
             if case .audio(let url) = self.ask(VoiceCommand.request(language: "en", text: "Ready."), command: command) {
                 try? FileManager.default.removeItem(at: url)
             }
-            let ready = self.process?.isRunning == true
+            let ready = self.isRunning
             DispatchQueue.main.async { self.state = ready ? .ready : .off }
         }
     }
@@ -161,39 +165,51 @@ final class ExternalVoice: ObservableObject {
         return VoiceCommand.parse(line)
     }
 
+    private var isRunning: Bool { pid > 0 && kill(pid, 0) == 0 }
+
     private func ensureRunning(_ command: String) -> Bool {
-        if let process, process.isRunning, runningPath == command { return true }
+        if isRunning, runningPath == command { return true }
         shutDown()
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: command)
-        let toProgram = Pipe(), fromProgram = Pipe()
-        process.standardInput = toProgram
-        process.standardOutput = fromProgram
-        process.standardError = FileHandle.nullDevice
+        let child: DisclaimedSpawn.Child
+        do { child = try DisclaimedSpawn.start(command) } catch {
+            log.error("Voice command did not start: \(String(describing: error), privacy: .public)")
+            return false
+        }
         let lines = Lines()
-        fromProgram.fileHandleForReading.readabilityHandler = { handle in
+        child.output.readabilityHandler = { handle in
             let data = handle.availableData
             if data.isEmpty { handle.readabilityHandler = nil; lines.close() } else { lines.append(data) }
         }
-        do { try process.run() } catch {
-            log.error("Voice command did not start: \(error.localizedDescription, privacy: .public)")
-            return false
+        // Reaped when it ends, so no zombie is left behind.
+        let watch = DispatchSource.makeProcessSource(identifier: child.pid, eventMask: .exit, queue: queue)
+        let pid = child.pid
+        watch.setEventHandler { [weak self] in
+            waitpid(pid, nil, 0)
+            watch.cancel()
+            if self?.pid == pid { self?.pid = 0 }
         }
+        watch.resume()
         log.info("Voice command started")
-        self.process = process
-        self.input = toProgram.fileHandleForWriting
+        self.pid = child.pid
+        self.exitWatch = watch
+        self.input = child.input
+        self.output = child.output
         self.lines = lines
         self.runningPath = command
         return true
     }
 
     private func shutDown() {
-        if process != nil { DispatchQueue.main.async { self.state = .off } }
-        if let process, process.isRunning { process.terminate() }
+        if pid > 0 {
+            DispatchQueue.main.async { self.state = .off }
+            kill(pid, SIGTERM)
+        }
         try? input?.close()
+        output?.readabilityHandler = nil
         lines?.close()
-        process = nil
+        pid = 0
         input = nil
+        output = nil
         lines = nil
         runningPath = nil
     }
