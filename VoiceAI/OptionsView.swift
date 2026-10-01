@@ -40,7 +40,6 @@ struct OptionsView: View {
     @AppStorage(Setting.whisperMode) private var whisperMode = false
     @AppStorage(Setting.readReplies) private var readReplies = true
     @AppStorage(Setting.voice) private var voice = ""
-    @AppStorage(VoiceCommand.pathKey) private var voiceCommand = ""
     @AppStorage(Setting.desktopFile) private var desktopFile = true
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var interface = Language.chosenInterface ?? Self.automatic
@@ -144,27 +143,8 @@ struct OptionsView: View {
                     Picker("Głos", selection: $voice) {
                         // The system name already carries the quality: "Krzysztof (rozszerzony)".
                         ForEach(voices, id: \.identifier) { Text($0.name).tag($0.identifier) }
-                        Divider()
-                        Text("Inny głos (polecenie)").tag(VoiceCommand.tag)
                     }
                     .disabled(!readReplies)
-                    if voice == VoiceCommand.tag {
-                        LabeledContent("Polecenie") {
-                            HStack {
-                                if voiceCommand.isEmpty {
-                                    Text("Nie wybrano").foregroundStyle(.secondary)
-                                } else {
-                                    Text(verbatim: (voiceCommand as NSString).lastPathComponent)
-                                        .help(voiceCommand)
-                                }
-                                Button("Wybierz…", action: chooseVoiceCommand)
-                            }
-                        }
-                        .disabled(!readReplies)
-                        VoiceCommandState(voice: speaker.external)
-                        Text("Program dostaje wiersz „język⇥tekst” i odpowiada ścieżką do pliku WAV. Gdy zawiedzie, czyta głos systemowy.")
-                            .font(.caption).foregroundStyle(.secondary)
-                    }
                     tuningSlider("Tempo", value: $speechRate, in: SpeechTuning.rateRange,
                                  normal: SpeechTuning.normalRate, low: "tortoise", high: "hare")
                     tuningSlider("Wysokość tonu", value: $speechPitch, in: SpeechTuning.pitchRange,
@@ -340,7 +320,6 @@ struct OptionsView: View {
         }
         .onAppear(perform: showVoiceInUse)
         .onChange(of: vocabulary.current.jezyk) { showVoiceInUse() }
-        .onChange(of: voice) { speaker.warmUp() }
     }
 
     /// Models on disk: folder inside the data folder, shown name, what it does.
@@ -440,26 +419,7 @@ struct OptionsView: View {
 
     /// Show the voice actually in use when none of this language was picked yet.
     private func showVoiceInUse() {
-        guard voice != VoiceCommand.tag else { return }
         if !voices.contains(where: { $0.identifier == voice }), let best = voices.first { voice = best.identifier }
-    }
-
-    /// Picks the program for "Inny głos (polecenie)" — any executable file, a script included.
-    private func chooseVoiceCommand() {
-        let panel = NSOpenPanel()
-        panel.canChooseDirectories = false
-        panel.prompt = String(localized: "Wybierz")
-        if !voiceCommand.isEmpty { panel.directoryURL = URL(fileURLWithPath: voiceCommand).deletingLastPathComponent() }
-        guard panel.runModal() == .OK, let url = panel.url else { return }
-        guard FileManager.default.isExecutableFile(atPath: url.path) else {
-            let alert = NSAlert()
-            alert.messageText = String(localized: "Tego pliku nie da się uruchomić")
-            alert.informativeText = String(localized: "Nadaj mu prawo uruchamiania: chmod +x w Terminalu.")
-            alert.runModal()
-            return
-        }
-        voiceCommand = url.path
-        speaker.warmUp()
     }
 
     private func appBinding(_ id: String, _ key: WritableKeyPath<AppRule, Bool>) -> Binding<Bool> {
@@ -478,25 +438,6 @@ struct OptionsView: View {
               let id = bundle.bundleIdentifier else { return }
         let name = FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: "")
         vocabulary.updateApps { $0[id] = $0[id] ?? AppRule(nazwa: name) }
-    }
-}
-
-/// Whether the voice program is still loading — the first sample waits for it.
-private struct VoiceCommandState: View {
-    @ObservedObject var voice: ExternalVoice
-
-    var body: some View {
-        switch voice.state {
-        case .loading:
-            HStack {
-                ProgressView().controlSize(.small)
-                Text("Wczytuję głos… pierwszy raz trwa około pół minuty.").foregroundStyle(.secondary)
-            }
-        case .ready:
-            Label("Głos gotowy", systemImage: "checkmark.circle").foregroundStyle(.secondary)
-        case .off:
-            EmptyView()
-        }
     }
 }
 

@@ -313,17 +313,5 @@ if !SpeechTuning.rateRange.contains(SpeechTuning.normalRate) || !SpeechTuning.pi
 if SpeechTuning.percent(0.6, of: 0.5) != "120 %" || SpeechTuning.percent(1.0, of: 1.0) != "100 %" { failed += 1; print("FAIL: slider percent") }
 tuningCases += 3
 
-// "Inny głos (polecenie)" — one line out, one line back.
-var commandCases = 0
-func expectCommand(_ ok: Bool, _ what: String) { commandCases += 1; if !ok { failed += 1; print("FAIL: voice command — \(what)") } }
-expectCommand(VoiceCommand.request(language: "pl", text: "Raz\tdwa\ntrzy") == "pl\tRaz dwa trzy\n", "tab and line break flattened")
-expectCommand(VoiceCommand.parse("/tmp/a b.wav\n") == .audio(URL(fileURLWithPath: "/tmp/a b.wav")), "path with a space")
-expectCommand(VoiceCommand.parse("BŁĄD: XTTS nie zna języka 'xx'") == .failure("XTTS nie zna języka 'xx'"), "error line")
-if case .failure = VoiceCommand.parse("model wczytany w 26 s") {} else { expectCommand(false, "chatter taken for a file") }
-commandCases += 1
-expectCommand(VoiceCommand.sentences("Dzień dobry. Jak się masz? Dobrze!") == ["Dzień dobry.", "Jak się masz?", "Dobrze!"], "three sentences")
-expectCommand(VoiceCommand.sentences("bez kropki") == ["bez kropki"], "one sentence without a full stop")
-expectCommand(VoiceCommand.sentences("  \n ").isEmpty, "nothing to read")
-
-print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases) cases" : "\(failed) failed")
+print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)
