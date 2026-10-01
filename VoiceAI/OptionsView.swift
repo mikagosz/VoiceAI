@@ -26,6 +26,8 @@ enum Setting {
 struct OptionsView: View {
     @ObservedObject var vocabulary: VocabularyStore
     @ObservedObject var textModel: TextModel
+    @ObservedObject private var whisper = WhisperStatus.shared
+    @ObservedObject private var microphone = Microphone.shared
     /// The app's one reader — a sample after a slider moves must not talk over a reply.
     let speaker: Speaker
     @AppStorage(SpeechTuning.rateKey) private var speechRate = SpeechTuning.normalRate
@@ -83,6 +85,13 @@ struct OptionsView: View {
                 }
             }
             Section {
+                LabeledContent("Mikrofon") {
+                    HStack {
+                        Text(verbatim: microphone.name ?? String(localized: "Brak mikrofonu"))
+                            .foregroundStyle(microphone.name == nil ? .red : .secondary)
+                        Button("Zmień…") { Microphone.openSoundSettings() }
+                    }
+                }
                 Picker("Klawisz dyktowania", selection: $dictationKey) {
                     ForEach(DictationKey.allCases, id: \.rawValue) { Text(verbatim: $0.name).tag($0.rawValue) }
                 }
@@ -244,11 +253,14 @@ struct OptionsView: View {
                             Text(model.role).font(.caption).foregroundStyle(.secondary)
                         }
                         Spacer()
+                        if model.folder == Self.whisper.folder {
+                            whisperState
+                        }
                         Text(verbatim: sizes[model.folder].map(Uninstaller.formatted) ?? "—").foregroundStyle(.secondary)
                         Button {
                             NSWorkspace.shared.activateFileViewerSelecting([Uninstaller.data.appending(path: model.folder)])
                         } label: {
-                            Image(systemName: "magnifyingglass")
+                            Image(systemName: "folder")
                         }
                         .buttonStyle(.borderless)
                         .help("Pokaż w Finderze")
@@ -262,7 +274,7 @@ struct OptionsView: View {
             } header: {
                 Text("Modele i pliki")
             } footer: {
-                Text("Wszystko, co VoiceAI zapisuje, leży w tym jednym folderze. Whisper pobiera się tu przy pierwszym uruchomieniu, model językowy — dopiero na żądanie.")
+                Text("Wszystko, co VoiceAI zapisuje, leży w tym jednym folderze. Whisper pobiera się tu sam przy pierwszym uruchomieniu — gdy pobieranie się nie uda, przycisk „Pobierz” przy nim spróbuje jeszcze raz. Model językowy pobiera się dopiero na żądanie.")
                     .foregroundStyle(.secondary)
             }
             .task(id: textModel.installed.map(\.id)) { measureSizes() }
@@ -324,6 +336,23 @@ struct OptionsView: View {
         return list
     }
 
+    /// Whisper: progress while downloading, „Gotowy” once loaded, a download button when it failed.
+    @ViewBuilder private var whisperState: some View {
+        switch whisper.state {
+        case .downloading(let fraction?):
+            ProgressView(value: fraction).frame(width: 80)
+            Text(verbatim: "\(Int(fraction * 100))%").monospacedDigit().foregroundStyle(.secondary)
+        case .downloading(nil):
+            ProgressView().controlSize(.small)
+            Text("Wczytuję…").foregroundStyle(.secondary)
+        case .ready:
+            Text("Gotowy").foregroundStyle(.secondary)
+        case .failed(let message):
+            Button("Pobierz") { whisper.load() }
+                .help(message)
+        }
+    }
+
     private var lastCheckText: String {
         guard let date = updates.lastCheck else { return String(localized: "Jeszcze nie sprawdzano") }
         return String(localized: "Ostatnio: \(date.formatted(date: .abbreviated, time: .shortened))")
@@ -365,9 +394,11 @@ struct OptionsView: View {
                 Slider(value: value, in: range) {
                     Text(title)
                 } minimumValueLabel: {
-                    Image(systemName: low)
+                    // Stała szerokość ikon: inaczej każdy suwak zaczyna się i kończy gdzie indziej
+                    // (żółw jest szerszy od strzałki) — 0.1.42, uwaga [U] ze zrzutu.
+                    Image(systemName: low).frame(width: 24)
                 } maximumValueLabel: {
-                    Image(systemName: high)
+                    Image(systemName: high).frame(width: 24)
                 } onEditingChanged: { editing in
                     if !editing { speaker.sample(language: vocabulary.current.jezyk) }
                 }

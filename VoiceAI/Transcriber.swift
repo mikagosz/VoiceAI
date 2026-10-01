@@ -209,3 +209,19 @@ final class Transcriber {
         return nil
     }
 }
+
+/// What the settings show for Whisper: downloading (with progress), loading, ready or failed —
+/// and the button that downloads it again. Until 0.1.42 the row had only a size and a Finder
+/// button, so a missing or broken model could not be fetched from the app at all.
+@MainActor
+final class WhisperStatus: ObservableObject {
+    static let shared = WhisperStatus()
+
+    enum State: Equatable {
+        case downloading(Double?), ready, failed(String)
+    }
+
+    @Published var state = State.downloading(nil)
+    /// Set by the app delegate: loads the model, downloading it first when it is not on disk.
+    var load: () -> Void = {}
+}

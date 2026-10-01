@@ -113,15 +113,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func loadModel() {
         state = .loading(nil)
+        WhisperStatus.shared.load = { [weak self] in self?.loadModel() }
+        WhisperStatus.shared.state = .downloading(nil)
         Task { @MainActor in
             do {
                 try await transcriber.load { fraction in
-                    DispatchQueue.main.async { self.state = .loading(fraction) }
+                    DispatchQueue.main.async {
+                        self.state = .loading(fraction)
+                        WhisperStatus.shared.state = .downloading(fraction)
+                    }
                 }
                 state = .ready
+                WhisperStatus.shared.state = .ready
                 nextFile()
             } catch {
-                state = .failed(String(localized: "Nie udało się wczytać modelu: \(error.localizedDescription)"))
+                let message = String(localized: "Nie udało się wczytać modelu: \(error.localizedDescription)")
+                state = .failed(message)
+                WhisperStatus.shared.state = .failed(message)
             }
         }
     }

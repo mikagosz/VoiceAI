@@ -14,7 +14,9 @@ enum SpeechTuning {
 
     static let normalRate = 0.5
     static let normalPitch = 1.0
-    static let normalVolume = 1.0
+    /// Połowa skali, nie maksimum: domyślnie lektor nie ma już dokąd podgłośnić, a suwak jest po to,
+    /// żeby użytkownik sam podbijał (0.1.42, decyzja [U]). Na suwaku: 100 % domyślnie, do 200 %.
+    static let normalVolume = 0.5
 
     static let rateRange = 0.3...0.7
     static let pitchRange = 0.75...1.5
