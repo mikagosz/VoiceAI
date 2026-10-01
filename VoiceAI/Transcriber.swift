@@ -80,10 +80,6 @@ final class Transcriber {
 
     private func text(of samples: [Float], options: DecodingOptions, whisper: WhisperKit) async throws -> String {
         let results = try await whisper.transcribe(audioArray: samples, decodeOptions: options)
-        // TEMPORARY timing (speed work 2026-10-01) — where Whisper's ~1.7 s goes; remove with this block.
-        for t in results.map(\.timings) {
-            log.notice("WHISPER audio \(t.inputAudioSeconds, format: .fixed(precision: 1), privacy: .public) s | mel \(t.logmels, format: .fixed(precision: 2), privacy: .public) | encoder \(t.encoding, format: .fixed(precision: 2), privacy: .public) (\(Int(t.totalEncodingRuns), privacy: .public)×) | decoder \(t.decodingLoop, format: .fixed(precision: 2), privacy: .public) (\(Int(t.totalDecodingLoops), privacy: .public) steps, prompt \(options.promptTokens?.count ?? 0, privacy: .public) tokens, fallbacks \(Int(t.totalDecodingFallbacks), privacy: .public), windows \(Int(t.totalDecodingWindows), privacy: .public)) | first token \(t.firstTokenTime - t.pipelineStart, format: .fixed(precision: 2), privacy: .public) | full \(t.fullPipeline, format: .fixed(precision: 2), privacy: .public)")
-        }
         return results.map(\.text).joined(separator: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
