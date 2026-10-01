@@ -501,7 +501,7 @@ private struct VoiceCommandState: View {
         case .loading:
             HStack {
                 ProgressView().controlSize(.small)
-                Text("Wczytuję głos… pierwszy raz trwa około pół minuty.").foregroundStyle(.secondary)
+                Text("Wczytuję głos… wolny program potrafi potrzebować minuty.").foregroundStyle(.secondary)
             }
         case .ready:
             Label("Głos gotowy", systemImage: "checkmark.circle").foregroundStyle(.secondary)

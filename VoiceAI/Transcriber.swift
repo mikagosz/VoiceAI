@@ -169,14 +169,6 @@ final class Transcriber {
 
     /// The file's sound as 16 kHz mono floats — what Whisper reads. AVAssetReader does the
     /// resampling and mixes the channels down, and it opens video as well as audio.
-    static func samples(from file: URL) async throws -> [Float] {
-        let (reader, output) = try await Self.reader(for: file)
-        var samples: [Float] = []
-        while let chunk = Self.next(output) { samples += chunk }
-        if reader.status == .failed { throw reader.error ?? FileError.noAudio }
-        return samples
-    }
-
     private static func reader(for file: URL) async throws -> (AVAssetReader, AVAssetReaderTrackOutput) {
         let asset = AVURLAsset(url: file)
         guard let track = try await asset.loadTracks(withMediaType: .audio).first else { throw FileError.noAudio }

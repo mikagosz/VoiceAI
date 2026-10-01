@@ -2821,22 +2821,6 @@
         }
       }
     },
-    "Wczytuję głos… pierwszy raz trwa około pół minuty.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading the voice… the first time takes about half a minute."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wczytuję głos… pierwszy raz trwa około pół minuty."
-          }
-        }
-      }
-    },
     "Głos gotowy": {
       "localizations": {
         "en": {
@@ -2881,6 +2865,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nie udało się zapisać zgody w pęku kluczy"
+          }
+        }
+      }
+    },
+    "Wczytuję głos… wolny program potrafi potrzebować minuty.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading the voice… a slow program can take a minute."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wczytuję głos… wolny program potrafi potrzebować minuty."
           }
         }
       }

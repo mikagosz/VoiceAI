@@ -37,13 +37,13 @@ struct Stats {
     func record(_ text: String, seconds: Double, at date: Date = Date()) {
         var all = stored
         let key = Self.dayKey.string(from: date)
-        let old = all[key] ?? [0, 0]
+        let old = Self.pair(all[key])
         all[key] = [old[0] + Double(Self.words(in: text)), old[1] + seconds]
         defaults.set(all, forKey: Self.key)
     }
 
     func day(_ date: Date = Date()) -> Day {
-        let value = stored[Self.dayKey.string(from: date)] ?? [0, 0]
+        let value = Self.pair(stored[Self.dayKey.string(from: date)])
         return Day(words: Int(value[0]), seconds: value[1])
     }
 
@@ -59,6 +59,13 @@ struct Stats {
             current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
         return total
+    }
+
+    /// `[words, seconds]`; a day edited by hand into something shorter counts as empty
+    /// instead of crashing the app on the next dictation.
+    static func pair(_ value: [Double]?) -> [Double] {
+        guard let value, value.count >= 2 else { return [0, 0] }
+        return value
     }
 
     static func words(in text: String) -> Int {

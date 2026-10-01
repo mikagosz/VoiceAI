@@ -75,7 +75,7 @@ final class ExternalVoice: ObservableObject {
                         self.play(buffer, last: last, reading: reading)
                     }
                 case .failure(let reason):
-                    log.error("Voice command failed: \(reason, privacy: .public)")
+                    log.error("Voice command failed: \(reason, privacy: .private)")
                     return self.giveUp(sentences[index...], reading, fallback)
                 }
             }

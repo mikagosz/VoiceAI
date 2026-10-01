@@ -79,7 +79,11 @@ struct JournalView: View {
         panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .plainText]
         panel.nameFieldStringValue = String(localized: "Dziennik VoiceAI") + ".md"
         guard panel.runModal() == .OK, let url = panel.url else { return }
-        try? Journal.markdown(journal.entries).write(to: url, atomically: true, encoding: .utf8)
+        do {
+            try Journal.markdown(journal.entries).write(to: url, atomically: true, encoding: .utf8)
+        } catch {
+            problem = error.localizedDescription
+        }
     }
 }
 

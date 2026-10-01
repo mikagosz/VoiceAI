@@ -9,8 +9,6 @@ final class Speaker {
     private let synthesizer = AVSpeechSynthesizer()
     let external = ExternalVoice()
 
-    var speaking: Bool { synthesizer.isSpeaking || external.speaking }
-
     init() {
         warmUp()
     }

@@ -313,6 +313,8 @@ if !SpeechTuning.rateRange.contains(SpeechTuning.normalRate) || !SpeechTuning.pi
 if SpeechTuning.percent(0.6, of: 0.5) != "120 %" || SpeechTuning.percent(1.0, of: 1.0) != "100 %" { failed += 1; print("FAIL: slider percent") }
 tuningCases += 3
 
+// Stats from preferences edited by hand (audit 2026-10-01, P3-02).
+if Stats.pair([5]) != [0, 0] || Stats.pair(nil) != [0, 0] || Stats.pair([3, 4]) != [3, 4] { failed += 1; print("FAIL: stats pair") }
 // "Inny głos (polecenie)" — one line out, one line back.
 var commandCases = 0
 func expectCommand(_ ok: Bool, _ what: String) { commandCases += 1; if !ok { failed += 1; print("FAIL: voice command — \(what)") } }
