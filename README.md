@@ -55,7 +55,7 @@ memory (≈2.7 GB) after 10 minutes unused.
 ## Settings
 
 Menu → **Settings…**: the dictation key, the app language (automatic — Polish on a Polish Mac, English everywhere else — or picked by hand), the speech language Whisper listens for, the level bar, whisper mode, the icon style, reading Claude's replies
-and the voice with its speed, pitch and volume, per-app rules (full stop at the end, capital first letter, trailing space),
+and the voice (a system voice or a program of your own) with its speed, pitch and volume, per-app rules (full stop at the end, capital first letter, trailing space),
 what happens with no text field, updates, and launch at login.
 
 ## Updates
@@ -87,6 +87,22 @@ download in VoiceOver Utility → Speech → Voice → Customize). Pressing the 
 ```
 
 Use the path of your own copy of `VoiceAI.app` in the command.
+
+### Another voice (a program of your own)
+
+Settings → Claude's replies → Voice → **Other Voice (Command)** hands the reading to any program you pick —
+a wrapper around a text-to-speech engine of your choice. VoiceAI ships no engine of its own. The program is
+started once and kept running, so a slow engine loads its model only once; replies are read sentence by
+sentence, the speed, pitch and volume sliders still apply, and the system voice takes over whenever the program
+fails or stays silent for two minutes.
+
+The contract: for every sentence VoiceAI writes one line, `language<TAB>text`, to the program's standard input
+and waits for one line on its standard output — the path to a WAV file (VoiceAI reads it, then deletes it) or
+`BŁĄD: reason`. Anything else goes to standard error.
+
+The program runs with VoiceAI's permissions (microphone and Accessibility), so it runs only as you approved it:
+the path and a SHA-256 of the file are kept in your keychain when you pick it, and a program whose file has
+changed since is not started until you pick it again.
 
 ## Requirements
 
@@ -144,7 +160,8 @@ from fractal8.eu. On your Mac it:
 - puts the text on the clipboard to paste it, then puts your previous clipboard back,
 - writes its word list, journal and models to `~/Library/Application Support/VoiceAI/`,
 - with the Claude Code hook set up, reads the reply from the session file Claude Code names
-  and hands it over through a file only your user can read.
+  and hands it over through a file only your user can read,
+- with **Other Voice (Command)** picked, starts the program you chose and passes it the sentences to read.
 
 The system log gets errors and counts, never the dictated text.
 
