@@ -149,6 +149,22 @@
         }
       }
     },
+    "Brak mikrofonu — podłącz go albo wybierz w Ustawieniach dźwięku": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No microphone — plug one in or choose it in Sound settings"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak mikrofonu — podłącz go albo wybierz w Ustawieniach dźwięku"
+          }
+        }
+      }
+    },
     "Brak zainstalowanych głosów w tym języku — pobierzesz je w menu Głos.": {
       "localizations": {
         "en": {

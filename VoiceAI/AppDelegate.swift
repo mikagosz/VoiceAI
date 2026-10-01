@@ -1,5 +1,6 @@
 import AppKit
 import AVFoundation
+import Combine
 import ServiceManagement
 import os
 
@@ -68,6 +69,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.delegate = self
         statusItem.menu = menu
         updateIcon()
+        // @Published fires before the value is stored, so redraw on the next turn of the run loop.
+        microphoneWatch = Microphone.shared.$name.receive(on: RunLoop.main).sink { [weak self] _ in
+            MainActor.assumeIsolated { self?.updateIcon() }
+        }
 
         vocabulary.reload()
         key.onPress = { [weak self] in
@@ -159,6 +164,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return
         default:
             break
+        }
+        // No input device: AVAudioEngine does not throw then — it makes up a 44.1 kHz stereo input
+        // and records silence (measured on the Mac mini, 0.1.64), so the wave showed and the
+        // no-microphone message from 0.1.59 never came up. Ask Core Audio before starting.
+        if Microphone.defaultInputName() == nil {
+            flash(String(localized: "Brak mikrofonu — podłącz go albo wybierz w Ustawieniach dźwięku"))
+            return
         }
         do {
             try recorder.start()
@@ -381,6 +393,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var iconLevels: [CGFloat] = []
     private var iconPhase: CGFloat = 0
     private var iconTimer: Timer?
+    /// Redraws the icon when the default input comes or goes (plugged in, unplugged, changed).
+    private var microphoneWatch: AnyCancellable?
 
     /// Sets the icon for the current state and runs the animation only while it moves.
     private func updateIcon() {
@@ -420,7 +434,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         var levels = style.restingLevels
         switch state {
         case .loading: mode = .loading
-        case .ready: mode = .idle
+        case .ready:
+            // No microphone: the wave lies flat and grey, as it did until 0.1.59 turned the
+            // failed press into a message — now it shows before the key is even pressed.
+            mode = Microphone.shared.name == nil ? .failed : .idle
         case .recording:
             mode = .active
             levels = iconLevels
