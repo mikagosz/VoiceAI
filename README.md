@@ -100,9 +100,9 @@ The contract: for every sentence VoiceAI writes one line, `language<TAB>text`, t
 and waits for one line on its standard output — the path to a WAV file (VoiceAI reads it, then deletes it) or
 `BŁĄD: reason`. Anything else goes to standard error.
 
-The program runs with VoiceAI's permissions (microphone and Accessibility), so it runs only as you approved it:
-the path and a SHA-256 of the file are kept in your keychain when you pick it, and a program whose file has
-changed since is not started until you pick it again.
+The program does not get VoiceAI's permissions: macOS would normally let a program an app starts use that
+app's microphone and Accessibility access, so VoiceAI starts it as a process of its own, the way Terminal does.
+A speech engine needs neither.
 
 ## Requirements
 
