@@ -12,7 +12,7 @@ struct JournalEntry: Codable, Identifiable, Equatable {
 final class Journal: ObservableObject {
     @Published private(set) var entries: [JournalEntry] = []
     /// Set when the file exists but cannot be read — writing is then refused.
-    private(set) var unreadable = false
+    @Published private(set) var unreadable = false
     let file: URL
 
     init(directory: URL) {

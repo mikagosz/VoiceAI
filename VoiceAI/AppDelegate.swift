@@ -254,9 +254,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 stats.record(text, seconds: seconds)
                 // Nowhere to type: the text goes to VoiceAI's journal instead of being lost.
                 if noTextField {
-                    try journal.add(text)
-                    confirmation = String(localized: "Zapisane w dzienniku")
-                    if !showLevelBar { NSSound(named: "Pop")?.play() }
+                    do {
+                        try journal.add(text)
+                        confirmation = String(localized: "Zapisane w dzienniku")
+                        if !showLevelBar { NSSound(named: "Pop")?.play() }
+                    } catch {
+                        // The file is left alone; the text stays in the menu's recent list.
+                        log.error("Journal not saved: \(error.localizedDescription, privacy: .public)")
+                        confirmation = String(localized: "Dziennik uszkodzony — tekst jest w menu, w „Ostatnie”")
+                        NSSound.beep()
+                    }
                     if desktopFile { Paster.paste(text) }
                 } else if !Paster.paste(text) {
                     NSSound.beep()

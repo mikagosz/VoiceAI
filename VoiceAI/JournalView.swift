@@ -13,7 +13,16 @@ struct JournalView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if journal.entries.isEmpty {
+            if journal.unreadable {
+                // Not "empty": the entries are on disk, VoiceAI only refuses to write over a file it cannot read.
+                ContentUnavailableView {
+                    Label("Plik dziennika jest uszkodzony", systemImage: "exclamationmark.triangle")
+                } description: {
+                    Text("VoiceAI go nie nadpisze. Popraw plik dziennik.json albo przenieś go w inne miejsce — nowy dziennik zacznie się od zera.")
+                } actions: {
+                    Button("Pokaż w Finderze") { NSWorkspace.shared.activateFileViewerSelecting([journal.file]) }
+                }
+            } else if journal.entries.isEmpty {
                 ContentUnavailableView("Dziennik jest pusty", systemImage: "book.closed",
                                        description: Text("Dyktuj, gdy nie stoisz w żadnym polu tekstowym — tekst trafi tutaj."))
             } else {

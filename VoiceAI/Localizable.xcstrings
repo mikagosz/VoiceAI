@@ -2884,6 +2884,54 @@
           }
         }
       }
+    },
+    "Dziennik uszkodzony — tekst jest w menu, w „Ostatnie”": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Journal damaged — the text is in the menu, under “Recent”"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziennik uszkodzony — tekst jest w menu, w „Ostatnie”"
+          }
+        }
+      }
+    },
+    "Plik dziennika jest uszkodzony": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The journal file is damaged"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik dziennika jest uszkodzony"
+          }
+        }
+      }
+    },
+    "VoiceAI go nie nadpisze. Popraw plik dziennik.json albo przenieś go w inne miejsce — nowy dziennik zacznie się od zera.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI won’t write over it. Fix dziennik.json or move it elsewhere — a new journal will start from scratch."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI go nie nadpisze. Popraw plik dziennik.json albo przenieś go w inne miejsce — nowy dziennik zacznie się od zera."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
