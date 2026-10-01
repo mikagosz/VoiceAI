@@ -181,7 +181,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 }
             }
         } catch {
-            state = .failed(String(localized: "Mikrofon: \(error.localizedDescription)"))
+            // No microphone (unplugged, none chosen): say so in the level bar and stay ready, so the
+            // next press tries again. Until 0.1.59 this was a failed state that only reloading the
+            // speech model cleared — the key stayed dead after the microphone came back.
+            log.error("Recording did not start: \(error.localizedDescription, privacy: .public)")
+            flash(String(localized: "Mikrofon: \(error.localizedDescription)"))
         }
     }
 
