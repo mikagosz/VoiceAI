@@ -4,7 +4,9 @@ import AVFoundation
 /// Sentences are asked for one by one on a background queue and queued for playback as they
 /// arrive, so the first sentence plays while the next is still being made. The three sliders
 /// still apply: tempo and pitch through a time-pitch unit, loudness as gain.
-final class ExternalVoice {
+final class ExternalVoice: ObservableObject {
+    enum State { case off, loading, ready }
+
     /// How long one sentence may take, model loading included, before the program is restarted.
     private static let replyTimeout: TimeInterval = 120
 
@@ -22,6 +24,8 @@ final class ExternalVoice {
     private let gain = AVAudioUnitEQ(numberOfBands: 0)
     private var connected: AVAudioFormat?
     private(set) var speaking = false
+    /// Shown in Settings: a slow model takes half a minute to load, "Posłuchaj" waits for it.
+    @Published private(set) var state = State.off
 
     /// Bumped by `stop`; work of an older reading is dropped wherever it is.
     private let generation = Generation()
@@ -32,9 +36,19 @@ final class ExternalVoice {
         for node in [player, timePitch, gain] as [AVAudioNode] { engine.attach(node) }
     }
 
-    /// Starts the program ahead of the first reply, so a slow model is loaded by then.
+    /// Starts the program ahead of the first reply and has it read one throwaway word, so the
+    /// model is loaded — and its first, slowest sentence made — before anything is to be heard.
+    /// English, the language a speech engine is most likely to know.
     func warmUp(_ command: String) {
-        queue.async { _ = self.ensureRunning(command) }
+        queue.async {
+            if let process = self.process, process.isRunning, self.runningPath == command { return }
+            DispatchQueue.main.async { self.state = .loading }
+            if case .audio(let url) = self.ask(VoiceCommand.request(language: "en", text: "Ready."), command: command) {
+                try? FileManager.default.removeItem(at: url)
+            }
+            let ready = self.process?.isRunning == true
+            DispatchQueue.main.async { self.state = ready ? .ready : .off }
+        }
     }
 
     /// Reads `text`; whatever the program fails to read goes to `fallback` (the system voice).
@@ -134,6 +148,7 @@ final class ExternalVoice {
 
     private func ask(_ request: String, command: String) -> VoiceCommand.Reply {
         guard ensureRunning(command), let input, let lines else { return .failure("the program did not start") }
+        let start = Date()
         do { try input.write(contentsOf: Data(request.utf8)) } catch {
             shutDown()
             return .failure("the program closed its input")
@@ -142,6 +157,7 @@ final class ExternalVoice {
             shutDown()
             return .failure("no answer from the program")
         }
+        log.info("Voice command answered in \(Date().timeIntervalSince(start), format: .fixed(precision: 1), privacy: .public) s")
         return VoiceCommand.parse(line)
     }
 
@@ -172,6 +188,7 @@ final class ExternalVoice {
     }
 
     private func shutDown() {
+        if process != nil { DispatchQueue.main.async { self.state = .off } }
         if let process, process.isRunning { process.terminate() }
         try? input?.close()
         lines?.close()

@@ -161,6 +161,7 @@ struct OptionsView: View {
                             }
                         }
                         .disabled(!readReplies)
+                        VoiceCommandState(voice: speaker.external)
                         Text("Program dostaje wiersz „język⇥tekst” i odpowiada ścieżką do pliku WAV. Gdy zawiedzie, czyta głos systemowy.")
                             .font(.caption).foregroundStyle(.secondary)
                     }
@@ -477,6 +478,25 @@ struct OptionsView: View {
               let id = bundle.bundleIdentifier else { return }
         let name = FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: "")
         vocabulary.updateApps { $0[id] = $0[id] ?? AppRule(nazwa: name) }
+    }
+}
+
+/// Whether the voice program is still loading — the first sample waits for it.
+private struct VoiceCommandState: View {
+    @ObservedObject var voice: ExternalVoice
+
+    var body: some View {
+        switch voice.state {
+        case .loading:
+            HStack {
+                ProgressView().controlSize(.small)
+                Text("Wczytuję głos… pierwszy raz trwa około pół minuty.").foregroundStyle(.secondary)
+            }
+        case .ready:
+            Label("Głos gotowy", systemImage: "checkmark.circle").foregroundStyle(.secondary)
+        case .off:
+            EmptyView()
+        }
     }
 }
 

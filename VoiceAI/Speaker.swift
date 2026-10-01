@@ -7,7 +7,7 @@ import AVFoundation
 /// voice steps in whenever that program fails.
 final class Speaker {
     private let synthesizer = AVSpeechSynthesizer()
-    private let external = ExternalVoice()
+    let external = ExternalVoice()
 
     var speaking: Bool { synthesizer.isSpeaking || external.speaking }
 

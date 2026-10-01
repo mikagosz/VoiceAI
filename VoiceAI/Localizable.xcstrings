@@ -2820,6 +2820,38 @@
           }
         }
       }
+    },
+    "Wczytuję głos… pierwszy raz trwa około pół minuty.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading the voice… the first time takes about half a minute."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wczytuję głos… pierwszy raz trwa około pół minuty."
+          }
+        }
+      }
+    },
+    "Głos gotowy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voice ready"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Głos gotowy"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
