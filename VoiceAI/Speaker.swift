@@ -15,9 +15,9 @@ final class Speaker {
         warmUp()
     }
 
-    /// The program picked as the voice, if it is there to run.
+    /// The program picked as the voice — only as the user approved it (`VoiceCommandApproval`).
     private var command: String? {
-        UserDefaults.standard.string(forKey: Setting.voice) == VoiceCommand.tag ? VoiceCommand.path() : nil
+        UserDefaults.standard.string(forKey: Setting.voice) == VoiceCommand.tag ? VoiceCommandApproval.readyPath : nil
     }
 
     /// Starts the voice program now, so the first reply doesn't wait for its model.

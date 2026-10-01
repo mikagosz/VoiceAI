@@ -157,6 +157,10 @@ struct OptionsView: View {
                                     Text(verbatim: (voiceCommand as NSString).lastPathComponent)
                                         .help(voiceCommand)
                                 }
+                                if case .changed = VoiceCommandApproval.status() {
+                                    Text("Plik zmienił się od wyboru — wybierz go ponownie")
+                                        .foregroundStyle(.red)
+                                }
                                 Button("Wybierz…", action: chooseVoiceCommand)
                             }
                         }
@@ -455,6 +459,13 @@ struct OptionsView: View {
             let alert = NSAlert()
             alert.messageText = String(localized: "Tego pliku nie da się uruchomić")
             alert.informativeText = String(localized: "Nadaj mu prawo uruchamiania: chmod +x w Terminalu.")
+            alert.runModal()
+            return
+        }
+        // The approval covers this file as it is now; any later change to it needs a new pick.
+        guard VoiceCommandApproval.approve(url.path) else {
+            let alert = NSAlert()
+            alert.messageText = String(localized: "Nie udało się zapisać zgody w pęku kluczy")
             alert.runModal()
             return
         }

@@ -324,6 +324,21 @@ commandCases += 1
 expectCommand(VoiceCommand.sentences("Dzień dobry. Jak się masz? Dobrze!") == ["Dzień dobry.", "Jak się masz?", "Dobrze!"], "three sentences")
 expectCommand(VoiceCommand.sentences("bez kropki") == ["bez kropki"], "one sentence without a full stop")
 expectCommand(VoiceCommand.sentences("  \n ").isEmpty, "nothing to read")
+// The program runs only as approved: same path, same bytes (audit 2026-10-01, P1-01).
+let program = FileManager.default.temporaryDirectory.appending(path: "voiceai-check-\(UUID().uuidString).sh").path
+FileManager.default.createFile(atPath: program, contents: Data("#!/bin/sh\n".utf8), attributes: [.posixPermissions: 0o755])
+let approval = VoiceCommand.fingerprint(of: program).map { VoiceCommand.Approval(path: program, fingerprint: $0) }
+expectCommand(approval != nil, "fingerprint of a readable file")
+expectCommand(VoiceCommand.status(path: program, approval: approval) == .ready(program), "approved program is ready")
+expectCommand(VoiceCommand.status(path: program, approval: nil) == .changed(program), "no approval — does not run")
+expectCommand(VoiceCommand.status(path: program, approval: approval.map { VoiceCommand.Approval(path: "/bin/sh", fingerprint: $0.fingerprint) })
+              == .changed(program), "path swapped in preferences")
+try? Data("#!/bin/sh\necho swapped\n".utf8).write(to: URL(fileURLWithPath: program))
+expectCommand(VoiceCommand.status(path: program, approval: approval) == .changed(program), "file rewritten after approval")
+try? FileManager.default.setAttributes([.posixPermissions: 0o644], ofItemAtPath: program)
+expectCommand(VoiceCommand.status(path: program, approval: approval) == .none, "not executable")
+try? FileManager.default.removeItem(atPath: program)
+expectCommand(VoiceCommand.status(path: program, approval: approval) == .none, "file gone")
 
 print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)

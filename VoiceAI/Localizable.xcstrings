@@ -2852,6 +2852,38 @@
           }
         }
       }
+    },
+    "Plik zmienił się od wyboru — wybierz go ponownie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file changed since it was picked — pick it again"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik zmienił się od wyboru — wybierz go ponownie"
+          }
+        }
+      }
+    },
+    "Nie udało się zapisać zgody w pęku kluczy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not save the approval in the keychain"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać zgody w pęku kluczy"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
