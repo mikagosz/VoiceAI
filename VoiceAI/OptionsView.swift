@@ -311,8 +311,8 @@ struct OptionsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 620)
-        .frame(minHeight: 320)
+        // Szerokość od 620 w górę — do 0.1.43 stała, okna nie dało się poszerzyć.
+        .frame(minWidth: 620, maxWidth: .infinity, minHeight: 320)
         .sheet(isPresented: $textModel.addSheetShown) { AddModelView(textModel: textModel) }
         // No model left: the switches that need one go back off.
         .onChange(of: textModel.isDownloaded) { _, any in
@@ -469,6 +469,8 @@ final class OptionsWindow {
             let room = (NSScreen.main?.visibleFrame.height ?? 800) - 60
             window.setContentSize(NSSize(width: 620, height: min(680, room)))
             window.center()
+            // Rozmiar i miejsce zostają między otwarciami i uruchomieniami (0.1.44, polecenie [U]).
+            window.setFrameAutosaveName("VoiceAI.Ustawienia")
             self.window = window
         }
         NSApp.activate()
