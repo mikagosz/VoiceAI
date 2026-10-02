@@ -10,7 +10,7 @@ A menu bar dictation app for macOS built on Whisper large-v3-turbo, with Polish 
 [![Xcode 27+](https://img.shields.io/badge/Xcode-27%2B-147EFB?logo=xcode&logoColor=white)](https://developer.apple.com/xcode/)
 [![macOS 26+](https://img.shields.io/badge/macOS-26%2B-000000?logo=apple&logoColor=white)](https://www.apple.com/macos)
 
-<a href="https://github.com/sponsors/mikagosz"><img src="https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-EA4AAA?logo=githubsponsors&logoColor=white" width="350" alt="Sponsor on GitHub Sponsors"></a>
+<a href="https://github.com/sponsors/mikagosz"><img src="https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-EA4AAA?logo=githubsponsors&logoColor=white" width="220" alt="Sponsor on GitHub Sponsors"></a>
 
 VoiceAI replaces the system dictation, which misspells names and rewrites words on its own.
 Speech is recognised locally by Whisper through WhisperKit; nothing is sent anywhere. A word
