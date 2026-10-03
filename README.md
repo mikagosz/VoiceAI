@@ -31,6 +31,7 @@ VoiceAI can also read Claude Code's replies aloud.
 | | |
 |---|---|
 | **Right ⌥ held on its own** | records while held; on release the text is recognised and pasted where the cursor is. Any other key pressed meanwhile (⌥A for „ą”, shortcuts) cancels. Another key — left ⌥, right ⌘, right ⌃, right ⇧ or fn — can be picked in Settings. |
+| **Bluetooth headset** | with a Bluetooth headset microphone (AirPods, for example), wait about half a second after pressing the key before you speak — the headset needs a moment to switch its microphone on, and a first word said straight away can be lost. Found in testing. |
 | **Level bar** | a small pill at the bottom of the screen: the app and window the text is going to, and a wave that follows your voice. Can be turned off in Settings. |
 | **Menu bar icon** | a coloured wave; lights up and follows your voice while recording, a wave runs through it while recognising, it turns night blue in whisper mode. Small or wide, picked in Settings. |
 | **Audio and video files** | menu → **Transcribe Audio or Video File…**, or drop files on the app's icon: the text lands next to the file as `.txt` and `.srt` subtitles, never over an existing file. Several files are done one after another; progress shows in the menu. Long files are read ten minutes at a time. |
