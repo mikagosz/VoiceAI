@@ -325,6 +325,22 @@
         }
       }
     },
+    "Diagnostyka dyktowania": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictation diagnostics"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnostyka dyktowania"
+          }
+        }
+      }
+    },
     "Dziennik": {
       "localizations": {
         "en": {
@@ -785,6 +801,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mikrofon: %@"
+          }
+        }
+      }
+    },
+    "Model językowy: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language model: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model językowy: %@"
           }
         }
       }

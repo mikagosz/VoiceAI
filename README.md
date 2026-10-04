@@ -146,11 +146,13 @@ The checks can also be run on their own, without Xcode: `./Tests/check.sh`.
 ## Data on disk
 
 All in `~/Library/Application Support/VoiceAI/`: `slownik.json` (word list and app rules),
-`dziennik.json` (journal), `Modele/` (Whisper and the language models). Settings and the word
-counter live in the app's preferences.
+`dziennik.json` (journal), `diagnostyka.json` (the last 50 dictations step by step: microphone,
+loudness, Whisper's text, the language model's text and what was pasted — to trace a wrong
+sentence), `Modele/` (Whisper and the language models). Settings and the word counter live in
+the app's preferences.
 
 Settings → **Models and files** lists the installed models with their size. **Uninstall VoiceAI…**
-at the bottom of Settings asks what to remove (models, word list, journal, settings and cache),
+at the bottom of Settings asks what to remove (models, word list, journal, diagnostics, settings and cache),
 moves it all to the Trash and quits. macOS tells an app nothing when it is dragged to the Trash
 while closed; if it is running, VoiceAI notices and asks the same question.
 
@@ -163,7 +165,8 @@ from fractal8.eu. On your Mac it:
 
 - records from the microphone only while the key is held,
 - puts the text on the clipboard to paste it, then puts your previous clipboard back,
-- writes its word list, journal and models to `~/Library/Application Support/VoiceAI/`,
+- writes its word list, journal, the last 50 dictations (diagnostics) and models to
+  `~/Library/Application Support/VoiceAI/`,
 - with the Claude Code hook set up, reads the reply from the session file Claude Code names
   and hands it over through a file only your user can read,
 - with **Other Voice (Command)** picked, starts the program you chose and passes it the sentences to read.

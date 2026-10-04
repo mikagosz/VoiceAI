@@ -56,6 +56,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var pendingFiles: [URL] = []
     private var recordingStarted = Date()
     private lazy var journal = Journal(directory: directory)
+    private lazy var diagnostics = Diagnostics(directory: directory)
+    /// The default input when the key went down — for the diagnostics record.
+    private var recordingMicrophone: String?
     private let stats = Stats()
     private lazy var journalWindow = JournalWindow(journal: journal)
     /// With no text field to type into: also let Finder drop the text as a file (the old
@@ -168,7 +171,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // No input device: AVAudioEngine does not throw then — it makes up a 44.1 kHz stereo input
         // and records silence (measured on the Mac mini, 0.1.64), so the wave showed and the
         // no-microphone message from 0.1.59 never came up. Ask Core Audio before starting.
-        if Microphone.defaultInputName() == nil {
+        recordingMicrophone = Microphone.defaultInputName()
+        if recordingMicrophone == nil {
             flash(String(localized: "Brak mikrofonu"), symbol: "mic.slash")
             return
         }
@@ -234,7 +238,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         stopMeter()
         let seconds = Date().timeIntervalSince(recordingStarted)
         let threshold = whisperMode ? Self.whisperSilence : Self.silence
-        guard seconds >= Self.minimumSeconds, rms(samples) >= threshold else {
+        let level = rms(samples)
+        var record = DictationRecord(date: recordingStarted, microphone: recordingMicrophone, whisperMode: whisperMode,
+                                     heldSeconds: seconds, audioSeconds: Double(samples.count) / Recorder.sampleRate,
+                                     rms: level, loudness: Diagnostics.loudness(samples, sampleRate: Recorder.sampleRate))
+        guard seconds >= Self.minimumSeconds, level >= threshold else {
+            record.outcome = seconds < Self.minimumSeconds ? .tooShort : .silence
+            diagnostics.add(record)
             live.hide()
             state = .ready
             return
@@ -247,9 +257,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // The app the text is for — decided at release, before Whisper takes its second.
         let app = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
         let noTextField = Paster.certainlyNoTextField
-        Task { @MainActor in
+        Task { @MainActor [record] in
+            var record = record
             var confirmation: String?
             defer {
+                diagnostics.add(record)
                 if let confirmation, showLevelBar {
                     live.working(confirmation)
                     Task { @MainActor in
@@ -262,10 +274,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 state = .ready
             }
             do {
+                let started = Date()
                 let raw = try await transcriber.transcribe(samples, vocabulary: words)
-                let processed = await refine(words.apply(to: raw), language: words.jezyk)
+                record.whisperSeconds = Date().timeIntervalSince(started)
+                record.whisper = raw
+                let corrected = words.apply(to: raw)
+                if corrected != raw { record.vocabulary = corrected }
+                let processed = await refine(corrected, language: words.jezyk, record: &record)
                 let text = noTextField ? processed : words.finish(processed, for: app)
-                guard !text.isEmpty else { return }
+                record.text = text
+                guard !text.isEmpty else { record.outcome = .empty; return }
                 remember(text)
                 stats.record(text, seconds: seconds)
                 // Nowhere to type: the text goes to VoiceAI's journal instead of being lost.
@@ -280,11 +298,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                         confirmation = String(localized: "Dziennik uszkodzony — tekst jest w menu, w „Ostatnie”")
                         NSSound.beep()
                     }
+                    record.outcome = .journal
                     if desktopFile { Paster.paste(text) }
-                } else if !Paster.paste(text) {
+                } else if Paster.paste(text) {
+                    record.outcome = .pasted
+                } else {
+                    record.outcome = .notPasted
                     NSSound.beep()
                 }
             } catch {
+                record.error = error.localizedDescription
                 log.error("Dictation failed: \(error.localizedDescription, privacy: .public)")
                 NSSound.beep()
             }
@@ -354,20 +377,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// for, whole clauses went missing (measured 2026-09-29).
     /// Any failure keeps the text as Whisper gave it — a dictation is never lost to the model.
     @MainActor
-    private func refine(_ text: String, language: String) async -> String {
+    private func refine(_ text: String, language: String, record: inout DictationRecord) async -> String {
         let defaults = UserDefaults.standard
         let target = defaults.string(forKey: Setting.translateTo) ?? ""
         let tidy = defaults.bool(forKey: Setting.tidyText)
         guard textModel.isDownloaded, !text.isEmpty, tidy || (!target.isEmpty && target != language) else { return text }
         var result = text
+        record.model = textModel.selected?.name
+        let started = Date()
+        defer { record.modelSeconds = Date().timeIntervalSince(started) }
         do {
             if showLevelBar { live.working(String(localized: "Porządkuję…")) }
             result = try await textModel.tidy(text, language: language)
+            record.tidied = result
             if !target.isEmpty, target != language {
                 if showLevelBar { live.working(String(localized: "Tłumaczę…")) }
                 result = try await textModel.translate(result, to: target)
+                record.translated = result
             }
         } catch {
+            record.error = String(localized: "Model językowy: \(error.localizedDescription)")
             log.error("Language model failed: \(error.localizedDescription, privacy: .public)")
             return text
         }

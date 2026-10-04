@@ -29,6 +29,8 @@ enum Uninstaller {
             Item(title: String(localized: "Modele"), detail: String(localized: "rozpoznawanie mowy i modele językowe"), urls: [models]),
             Item(title: String(localized: "Słownik i reguły aplikacji"), detail: "slownik.json", urls: [data.appending(path: "slownik.json")]),
             Item(title: String(localized: "Dziennik"), detail: "dziennik.json", urls: [data.appending(path: "dziennik.json")]),
+            Item(title: String(localized: "Diagnostyka dyktowania"), detail: Diagnostics.fileName,
+                 urls: [data.appending(path: Diagnostics.fileName)]),
             Item(title: String(localized: "Ustawienia, licznik słów i pamięć podręczna"), detail: bundleID,
                  urls: [library.appending(path: "Caches/\(bundleID)"), library.appending(path: "HTTPStorages/\(bundleID)"),
                         ClaudeHook.replyFile,

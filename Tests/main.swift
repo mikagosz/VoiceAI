@@ -1,4 +1,7 @@
 import Foundation
+import os
+
+let log = Logger(subsystem: "com.mikagosz.VoiceAI", category: "check")
 
 let vocabulary = Vocabulary.defaults
 let cases: [(String, String)] = [
@@ -340,5 +343,25 @@ if let echo = try? DisclaimedSpawn.start("/bin/cat") {
 }
 expectCommand((try? DisclaimedSpawn.start("/nonexistent/voice")) == nil, "a missing program is an error, not a crash")
 
-print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases) cases" : "\(failed) failed")
+// Diagnostics: the last 50 dictations kept, the newest last; loudness every half second.
+var diagnosticsCases = 0
+func expectDiagnostics(_ ok: Bool, _ what: String) { diagnosticsCases += 1; if !ok { failed += 1; print("FAIL: diagnostics — \(what)") } }
+let diagnosticsFolder = FileManager.default.temporaryDirectory.appending(path: "voiceai-check-\(UUID().uuidString)")
+let diagnostics = Diagnostics(directory: diagnosticsFolder)
+for number in 1...53 {
+    var record = DictationRecord(date: Date(), heldSeconds: Double(number), audioSeconds: 1, rms: 0.01, loudness: [])
+    record.outcome = .pasted
+    diagnostics.add(record)
+}
+let kept = diagnostics.records()
+expectDiagnostics(kept.count == Diagnostics.limit, "keeps \(Diagnostics.limit), got \(kept.count)")
+expectDiagnostics(kept.first?.heldSeconds == 4 && kept.last?.heldSeconds == 53, "drops the oldest")
+try? Data("[".utf8).write(to: diagnostics.file)
+diagnostics.add(DictationRecord(date: Date(), heldSeconds: 1, audioSeconds: 1, rms: 0, loudness: []))
+expectDiagnostics(diagnostics.records().count == 1, "a damaged file starts over")
+let halves = Diagnostics.loudness([Float](repeating: 0.5, count: 8000) + [Float](repeating: 0, count: 12000), sampleRate: 16000)
+expectDiagnostics(halves == [0.5, 0, 0], "loudness per half second, got \(halves)")
+try? FileManager.default.removeItem(at: diagnosticsFolder)
+
+print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases + diagnosticsCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)
