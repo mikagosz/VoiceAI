@@ -1173,6 +1173,22 @@
         }
       }
     },
+    "Odpowiedź modelu dużo dłuższa niż dyktowanie — wklejony tekst z Whispera.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model's answer was far longer than the dictation — Whisper's text was pasted."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiedź modelu dużo dłuższa niż dyktowanie — wklejony tekst z Whispera."
+          }
+        }
+      }
+    },
     "Odinstalować VoiceAI?": {
       "localizations": {
         "en": {

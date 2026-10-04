@@ -369,31 +369,53 @@ final class TextModel: ObservableObject {
     func translate(_ text: String, to language: String) async throws -> String {
         let target = Locale(identifier: "en").localizedString(forLanguageCode: language) ?? language
         return try await ask("Translate the user's text into natural \(target). Keep names as they are. "
-                             + "Reply with the translation only.", text)
+                             + "Reply with the translation only.", text, maxTokens: text.count + 64)
     }
 
     /// Removes fillers, repeats and slips, fixes punctuation — without changing the meaning.
-    /// The Polish wording is the one measured on 2026-09-29; other languages get the same in English.
+    /// Measured on 2026-10-04 on six real dictations: with the 2026-09-29 wording alone Gemma cut whole
+    /// phrases ("w Chrzebrzeszynie", "też mi tam daj") in 3 of 6, and Bielik 4.5B wrapped all 6 in a
+    /// report ("Oto poprawiony tekst… Usunięto: …", up to 10 s). The ban on headings and comments plus
+    /// one worked example (a filler-laden sentence and its cleaned form, every other word kept) took
+    /// both to plain text only, and Gemma to 6 of 6 kept whole.
     func tidy(_ text: String, language: String) async throws -> String {
-        let instructions = language == "pl"
+        let polish = language == "pl"
+        let instructions = polish
             ? "Jesteś korektorem tekstu dyktowanego po polsku. Usuń wtrącenia (yyy, eee, znaczy), powtórzone słowa "
                 + "i przejęzyczenia, popraw literówki, polskie znaki i interpunkcję. Nie zmieniaj sensu, stylu ani nazw "
-                + "własnych, niczego nie dodawaj. Odpowiedz wyłącznie poprawionym tekstem."
+                + "własnych, niczego nie dodawaj. Odpowiedz wyłącznie poprawionym tekstem. Bez nagłówka, bez cudzysłowów, "
+                + "bez pogrubień, bez listy zmian i bez komentarza — tylko sam tekst, jakby wpisał go autor. Każde inne "
+                + "słowo zostaw tak, jak jest — nie skracaj, nie przestawiaj, nie streszczaj."
             : "You correct dictated text. Remove fillers (uh, um), repeated words and slips, fix typos and punctuation. "
-                + "Do not change the meaning, style or names, add nothing. Reply with the corrected text only."
-        return try await ask(instructions, text)
+                + "Do not change the meaning, style or names, add nothing. Reply with the corrected text only — no "
+                + "heading, no quotes, no bold, no list of changes, no comment. Leave every other word as it is: do not "
+                + "shorten, reorder or summarise."
+        let example = polish
+            ? (said: "Eee no to yyy jutro jutro idę do do sklepu w Chrzanowie, znaczy kup mleko i chleb, bo ja nie zdążę",
+               clean: "No to jutro idę do sklepu w Chrzanowie, kup mleko i chleb, bo ja nie zdążę.")
+            : (said: "Um so uh tomorrow tomorrow I'm going to to the shop in Leeds, I mean buy milk and bread, because I won't make it",
+               clean: "So tomorrow I'm going to the shop in Leeds, buy milk and bread, because I won't make it.")
+        let answer = try await ask(instructions, text, example: [.user(example.said), .assistant(example.clean)],
+                                   maxTokens: text.count / 2 + 64)
+        // Tidying only ever shortens. Far longer means a report or a loop (Bielik repeated one
+        // line until the token limit, 2026-10-04) — then the dictation keeps Whisper's text.
+        guard answer.count <= text.count * 3 / 2 + 40 else { throw TextModelError.rambling }
+        return answer
     }
 
     /// Reasoning blocks that some models (Qwen 3 and others) write before the answer.
     private static let thinking = try! NSRegularExpression(pattern: "<think>[\\s\\S]*?</think>")
 
-    private func ask(_ instructions: String, _ text: String) async throws -> String {
+    /// `maxTokens` scales with the text: a model that loops stops after about twice the dictation,
+    /// not after 1024 tokens (some 20 s).
+    private func ask(_ instructions: String, _ text: String, example: [Chat.Message] = [],
+                     maxTokens: Int) async throws -> String {
         if container == nil || loadedID != selected?.id { await load() }
         guard let container else { throw TextModelError.notReady }
         // Greedy (temperature 0): the same dictation always gives the same text. Thinking off:
         // it cost Gemma 4 10 s a sentence in Ollama; templates that know the switch honour it.
-        let session = ChatSession(container, instructions: instructions,
-                                  generateParameters: GenerateParameters(maxTokens: 1024, temperature: 0),
+        let session = ChatSession(container, instructions: instructions, history: example,
+                                  generateParameters: GenerateParameters(maxTokens: min(1024, maxTokens), temperature: 0),
                                   additionalContext: ["enable_thinking": false])
         var answer = try await session.respond(to: text)
         answer = Self.thinking.stringByReplacingMatches(in: answer, range: NSRange(answer.startIndex..., in: answer),
@@ -409,8 +431,13 @@ final class TextModel: ObservableObject {
 }
 
 enum TextModelError: LocalizedError {
-    case notReady
-    var errorDescription: String? { String(localized: "Model językowy nie jest pobrany.") }
+    case notReady, rambling
+    var errorDescription: String? {
+        switch self {
+        case .notReady: String(localized: "Model językowy nie jest pobrany.")
+        case .rambling: String(localized: "Odpowiedź modelu dużo dłuższa niż dyktowanie — wklejony tekst z Whispera.")
+        }
+    }
 }
 
 /// swift-transformers' tokenizer behind mlx-swift-lm's protocol — the adapter the library's
