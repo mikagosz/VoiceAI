@@ -32,6 +32,9 @@ struct DictationRecord: Codable, Equatable {
     /// Loudness of the whole recording (RMS) and of every half second.
     var rms: Float
     var loudness: [Float]
+    /// The app in front at release and why it did or did not count as a text field.
+    var app: String?
+    var focus: String?
     var outcome: Outcome = .failed
     var whisperSeconds: Double?
     /// Whisper's text, before anything else touched it.

@@ -103,31 +103,41 @@ enum Paster {
     /// nothing useful — in Finder it even drops a text clipping file on the desktop.
     /// Apps that say nothing about their focus (Electron: Claude, Obsidian) count as a text
     /// field, so a dictation meant for them never goes astray.
-    static var certainlyNoTextField: Bool {
-        guard let app = NSWorkspace.shared.frontmostApplication else { return true }
-        let finder = app.bundleIdentifier == "com.apple.finder"
+    static var certainlyNoTextField: Bool { focus().noTextField }
+
+    /// The same decision with what it rested on — the app, the focused element's role, the
+    /// Accessibility answers — for the diagnostics record. A dictation into Claude went to the
+    /// journal on 2026-10-04 and nothing said why.
+    static func focus() -> (noTextField: Bool, app: String?, why: String) {
+        guard let app = NSWorkspace.shared.frontmostApplication else { return (true, nil, "no frontmost app") }
+        let id = app.bundleIdentifier
+        let finder = id == "com.apple.finder"
         let element = AXUIElementCreateApplication(app.processIdentifier)
         var focused: CFTypeRef?
         let result = AXUIElementCopyAttributeValue(element, kAXFocusedUIElementAttribute as CFString, &focused)
         guard result == .success, let focused else {
-            if finder { return true }
+            if finder { return (true, id, "Finder, no focused element (\(result.rawValue))") }
             var windows: CFTypeRef?
             let listed = AXUIElementCopyAttributeValue(element, kAXWindowsAttribute as CFString, &windows)
-            return listed == .success && (windows as? [AXUIElement])?.isEmpty == true
+            let count = (windows as? [AXUIElement])?.count
+            return (listed == .success && count == 0, id,
+                    "no focused element (\(result.rawValue)), windows \(count.map(String.init) ?? "?") (\(listed.rawValue))")
         }
         let field = focused as! AXUIElement
         var role: CFTypeRef?
         AXUIElementCopyAttributeValue(field, kAXRoleAttribute as CFString, &role)
         let name = role as? String ?? ""
-        if ["AXTextField", "AXTextArea", "AXComboBox", "AXSearchField"].contains(name) { return false }
+        if ["AXTextField", "AXTextArea", "AXComboBox", "AXSearchField"].contains(name) { return (false, id, "role \(name)") }
         // The desktop (AXGroup/AXDesktop) answers the selected-text question too (measured
         // 2026-09-29), so in Finder only a real text field — renaming, search — counts.
-        if finder { return true }
+        if finder { return (true, id, "Finder, role \(name)") }
         var range: CFTypeRef?
-        if AXUIElementCopyAttributeValue(field, kAXSelectedTextRangeAttribute as CFString, &range) == .success { return false }
+        if AXUIElementCopyAttributeValue(field, kAXSelectedTextRangeAttribute as CFString, &range) == .success {
+            return (false, id, "role \(name), has a text selection")
+        }
         // Web content may hide an editor inside a generic element — count it as a field.
-        if ["AXWebArea", "AXGroup", "AXUnknown", ""].contains(name) { return false }
-        return true
+        if ["AXWebArea", "AXGroup", "AXUnknown", ""].contains(name) { return (false, id, "role \(name), web content") }
+        return (true, id, "role \(name), no text selection")
     }
 
     /// A new sentence glued to the previous one ("…klawisz.Testy") needs a space: add one

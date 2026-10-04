@@ -255,8 +255,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         vocabulary.reload()
         let words = vocabulary.current
         // The app the text is for — decided at release, before Whisper takes its second.
-        let app = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
-        let noTextField = Paster.certainlyNoTextField
+        let focus = Paster.focus()
+        let app = focus.app
+        let noTextField = focus.noTextField
+        record.app = app
+        record.focus = focus.why
         Task { @MainActor [record] in
             var record = record
             var confirmation: String?
