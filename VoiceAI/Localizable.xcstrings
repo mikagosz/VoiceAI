@@ -1301,6 +1301,22 @@
         }
       }
     },
+    "Polski — %@, nie pobrany": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polish — %@, not downloaded"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polski — %@, nie pobrany"
+          }
+        }
+      }
+    },
     "Pobieram %@…": {
       "localizations": {
         "en": {

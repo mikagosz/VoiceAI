@@ -230,15 +230,17 @@ struct OptionsView: View {
                     .contentShape(Rectangle())
                     .onTapGesture { textModel.selectedID = entry.id }
                 }
-                if !textModel.hasRecommended {
+                ForEach(textModel.notInstalled) { suggestion in
+                    let size = Uninstaller.formatted(suggestion.bytes)
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(verbatim: TextModel.recommended.name)
-                            Text("Zalecany — \(Uninstaller.formatted(TextModel.recommended.bytes)), nie pobrany")
+                            Text(verbatim: suggestion.name)
+                            Text(suggestion.repo == TextModel.recommended.repo
+                                 ? "Zalecany — \(size), nie pobrany" : "Polski — \(size), nie pobrany")
                                 .font(.caption).foregroundStyle(.secondary)
                         }
                         Spacer()
-                        Button("Pobierz") { Task { await textModel.downloadRecommended() } }
+                        Button("Pobierz") { Task { await textModel.download(suggestion) } }
                             .disabled(textModel.download != nil)
                     }
                 }

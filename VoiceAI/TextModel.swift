@@ -6,7 +6,7 @@ import MLXLMCommon
 import Tokenizers
 
 /// The language models that translate and tidy dictated text. One is recommended and offered
-/// first — Gemma 4 E2B, text-only, 4-bit MLX (2.7 GB, Apache 2.0), picked on 2026-09-29 after
+/// first (two Polish Bieliks follow it, for comparison) — Gemma 4 E2B, text-only, 4-bit MLX (2.7 GB, Apache 2.0), picked on 2026-09-29 after
 /// measuring three Gemmas: the fastest (0.8 s a sentence), the least memory and the most
 /// faithful to meaning. Anyone can add another MLX model from Hugging Face or from a folder;
 /// it is checked before anything is downloaded.
@@ -47,8 +47,24 @@ final class TextModel: ObservableObject {
         var fraction: Double?
     }
 
-    static let recommended = (repo: "mlx-community/Gemma4-E2B-IT-Text-int4", name: "Gemma 4 E2B",
-                              bytes: Int64(2_680_000_000))
+    /// A model offered with its own "Pobierz" button, no repository name to type.
+    struct Suggestion: Identifiable {
+        var repo: String
+        var name: String
+        var bytes: Int64
+        var id: String { repo }
+    }
+
+    static let recommended = Suggestion(repo: "mlx-community/Gemma4-E2B-IT-Text-int4", name: "Gemma 4 E2B",
+                                        bytes: 2_680_000_000)
+    /// The recommended model first, then Polish ones to try against it (2026-10-04): Bielik v3 from
+    /// SpeakLeash, trained on Polish. 4.5B in 4 bits weighs what Gemma does; 1.5B stays in 8 bits
+    /// (the official SpeakLeash build), since 4 bits cost a model that small too much.
+    static let suggested = [
+        recommended,
+        Suggestion(repo: "futurist-ai/Bielik-4.5B-v3.0-Instruct-MLX-4bit", name: "Bielik 4.5B", bytes: 2_680_000_000),
+        Suggestion(repo: "speakleash/Bielik-1.5B-v3.0-Instruct-MLX-8bit", name: "Bielik 1.5B", bytes: 1_700_000_000),
+    ]
     /// Unused this long, the model leaves memory (2.6 GB for Gemma); the next use loads it again in ~3 s.
     static let idleSeconds: TimeInterval = 600
     /// Written next to a model's files: its shown name and where it came from.
@@ -83,7 +99,8 @@ final class TextModel: ObservableObject {
     var selected: Entry? { installed.first { $0.id == selectedID } ?? installed.first }
     /// Whether any model is ready to use — what Settings and the dictation path ask.
     var isDownloaded: Bool { selected != nil }
-    var hasRecommended: Bool { installed.contains { $0.repo == Self.recommended.repo } }
+    /// Suggested models not on disk yet — each gets a "Pobierz" button in Settings.
+    var notInstalled: [Suggestion] { Self.suggested.filter { s in !installed.contains { $0.repo == s.repo } } }
 
     private static func folderName(_ repo: String) -> String { String(repo.split(separator: "/").last ?? "model") }
 
@@ -174,10 +191,10 @@ final class TextModel: ObservableObject {
 
     // MARK: - Installing
 
-    /// The recommended model: checked and downloaded like any other.
-    func downloadRecommended() async {
+    /// A suggested model: checked and downloaded like any other.
+    func download(_ suggestion: Suggestion) async {
         do {
-            await install(try await check(Self.recommended.repo), name: Self.recommended.name)
+            await install(try await check(suggestion.repo), name: suggestion.name)
         } catch {
             downloadError = error.localizedDescription
         }
