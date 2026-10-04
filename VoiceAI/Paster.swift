@@ -6,6 +6,17 @@ import AppKit
 enum Paster {
     static var trusted: Bool { AXIsProcessTrusted() }
 
+    /// The app the user is working in. `frontmostApplication` answered "loginwindow" on the
+    /// Mac mini (macOS 27.2, 2026-10-04) while Claude had the keyboard and the menu bar, so every
+    /// dictation was shown and recorded as going to the journal; the menu bar's owner was right.
+    static var frontApp: NSRunningApplication? {
+        let workspace = NSWorkspace.shared
+        if let owner = workspace.menuBarOwningApplication, owner.bundleIdentifier != "com.apple.loginwindow" {
+            return owner
+        }
+        return workspace.frontmostApplication
+    }
+
     /// Shows the system prompt that leads to Settings → Privacy → Accessibility.
     static func askForPermission() {
         let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
@@ -21,7 +32,7 @@ enum Paster {
     @discardableResult
     static func paste(_ text: String) -> Bool {
         let board = NSPasteboard.general
-        let app = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
+        let app = frontApp?.bundleIdentifier
         let before: Character?? = characterBeforeCaret()
         let continues: Bool
         if let before {
@@ -82,7 +93,7 @@ enum Paster {
             return Destination(name: String(localized: "Dziennik VoiceAI"), title: nil,
                                icon: NSImage(systemSymbolName: "book.closed", accessibilityDescription: nil))
         }
-        guard let app = NSWorkspace.shared.frontmostApplication else { return Destination(name: "—") }
+        guard let app = frontApp else { return Destination(name: "—") }
         return Destination(name: app.localizedName ?? app.bundleIdentifier ?? "?", title: windowTitle(of: app), icon: app.icon)
     }
 
@@ -109,7 +120,7 @@ enum Paster {
     /// Accessibility answers — for the diagnostics record. A dictation into Claude went to the
     /// journal on 2026-10-04 and nothing said why.
     static func focus() -> (noTextField: Bool, app: String?, why: String) {
-        guard let app = NSWorkspace.shared.frontmostApplication else { return (true, nil, "no frontmost app") }
+        guard let app = frontApp else { return (true, nil, "no frontmost app") }
         let id = app.bundleIdentifier
         let finder = id == "com.apple.finder"
         let element = AXUIElementCreateApplication(app.processIdentifier)
