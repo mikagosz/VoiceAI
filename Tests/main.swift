@@ -363,5 +363,19 @@ let halves = Diagnostics.loudness([Float](repeating: 0.5, count: 8000) + [Float]
 expectDiagnostics(halves == [0.5, 0, 0], "loudness per half second, got \(halves)")
 try? FileManager.default.removeItem(at: diagnosticsFolder)
 
-print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases + diagnosticsCases) cases" : "\(failed) failed")
+// Help: every text has its English translation in the catalog, every section 1–4 steps.
+var helpCases = 0
+func expectHelp(_ ok: Bool, _ what: String) { helpCases += 1; if !ok { failed += 1; print("FAIL: help — \(what)") } }
+let catalogData = (try? Data(contentsOf: URL(fileURLWithPath: "VoiceAI/Localizable.xcstrings"))) ?? Data()
+let catalog = ((try? JSONSerialization.jsonObject(with: catalogData)) as? [String: Any])?["strings"] as? [String: Any] ?? [:]
+expectHelp(!catalog.isEmpty, "catalog read")
+for text in Set(HelpContent.allStrings) {
+    let en = ((catalog[text] as? [String: Any])?["localizations"] as? [String: Any])?["en"]
+    expectHelp(en != nil, "no English for \"\(text)\"")
+}
+for section in HelpContent.sections {
+    expectHelp((1...4).contains(section.steps.count), "\(section.title): \(section.steps.count) steps")
+}
+
+print(failed == 0 ? "OK — \(cases.count + 1 + hookCases + boostCases + spacing.count + journalCases + statsCases + appCases + fileCases + scriptCases + updateCases + tuningCases + commandCases + diagnosticsCases + helpCases) cases" : "\(failed) failed")
 exit(failed == 0 ? 0 : 1)

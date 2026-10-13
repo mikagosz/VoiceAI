@@ -8,15 +8,19 @@ import AVFoundation
 final class Speaker {
     private let synthesizer = AVSpeechSynthesizer()
     let external = ExternalVoice()
+    /// Where the picked voice is kept — Help's copy reads a sample store, so it never starts the
+    /// user's voice program.
+    private let defaults: UserDefaults
 
-    init() {
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         warmUp()
     }
 
     /// The program picked as the voice, if it is there to run. It runs disclaimed
     /// (`DisclaimedSpawn`), without VoiceAI's permissions.
     private var command: String? {
-        UserDefaults.standard.string(forKey: Setting.voice) == VoiceCommand.tag ? VoiceCommand.path() : nil
+        defaults.string(forKey: Setting.voice) == VoiceCommand.tag ? VoiceCommand.path(in: defaults) : nil
     }
 
     /// Starts the voice program now, so the first reply doesn't wait for its model.
@@ -34,12 +38,12 @@ final class Speaker {
     /// The picked voice while it is still installed, otherwise the best one.
     func voice(for language: String) -> AVSpeechSynthesisVoice? {
         let voices = Self.voices(for: language)
-        let picked = UserDefaults.standard.string(forKey: Setting.voice)
+        let picked = defaults.string(forKey: Setting.voice)
         return voices.first { $0.identifier == picked } ?? voices.first
     }
 
     func pick(_ identifier: String) {
-        UserDefaults.standard.set(identifier, forKey: Setting.voice)
+        defaults.set(identifier, forKey: Setting.voice)
         warmUp()
     }
 

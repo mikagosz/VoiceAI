@@ -2980,6 +2980,846 @@
           }
         }
       }
+    },
+    "VoiceAI — Pomoc": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI — Help"
+          }
+        }
+      }
+    },
+    "Pomoc": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help"
+          }
+        }
+      }
+    },
+    "Pomoc VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI Help"
+          }
+        }
+      }
+    },
+    "Pierwsze kroki z VoiceAI…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting Started with VoiceAI…"
+          }
+        }
+      }
+    },
+    "Mikrofon": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Microphone"
+          }
+        }
+      }
+    },
+    "Zmień…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change…"
+          }
+        }
+      }
+    },
+    "Pierwsze kroki z VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting started with VoiceAI"
+          }
+        }
+      }
+    },
+    "Trzymasz klawisz, mówisz, puszczasz — tekst pojawia się tam, gdzie stoi kursor. Mowę rozpoznaje Whisper na tym Macu, bez internetu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold a key, speak, let go — the text appears where the cursor is. Whisper recognises your speech on this Mac, without the internet."
+          }
+        }
+      }
+    },
+    "Trzymaj klawisz i mów": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold the key and speak"
+          }
+        }
+      }
+    },
+    "Dyktujesz do każdego programu: do maila, notatki, czatu czy Terminala.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictate into any app: an email, a note, a chat or Terminal."
+          }
+        }
+      }
+    },
+    "Kliknij tam, gdzie ma się pojawić tekst.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click where the text should go."
+          }
+        }
+      }
+    },
+    "Trzymaj prawy ⌥. Pasek na dole ekranu pokazuje, do którego programu i okna trafi tekst.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold right ⌥. The bar at the bottom of the screen shows the app and window the text will go to."
+          }
+        }
+      }
+    },
+    "Mów — fala idzie za Twoim głosem. Puść klawisz, a po chwili tekst stoi w miejscu kursora.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speak — the wave follows your voice. Let go of the key, and a moment later the text is at the cursor."
+          }
+        }
+      }
+    },
+    "Inny klawisz wciśnięty w trakcie (np. ⌥A dla „ą”) anuluje nagranie, więc zwykłe pisanie nigdy nie zaczyna dyktowania. Przy pierwszym uruchomieniu VoiceAI pobiera model Whisper (ok. 1,5 GB) i prosi o dwie zgody: Mikrofon i Dostępność — bez Dostępności nie usłyszy klawisza i nie wklei tekstu. Ze słuchawkami Bluetooth odczekaj pół sekundy po wciśnięciu klawisza, zanim zaczniesz mówić: słuchawki potrzebują chwili, żeby włączyć mikrofon.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any other key pressed meanwhile (⌥A for “ą” on a Polish keyboard, for example) cancels the recording, so ordinary typing never starts a dictation. On first launch VoiceAI downloads the Whisper model (about 1.5 GB) and asks for two permissions: Microphone and Accessibility — without Accessibility it cannot hear the key or paste the text. With a Bluetooth headset, wait half a second after pressing the key before you speak: the headset needs a moment to switch its microphone on."
+          }
+        }
+      }
+    },
+    "Fala w pasku menu mówi, co właśnie robi VoiceAI.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The wave in the menu bar tells you what VoiceAI is doing."
+          }
+        }
+      }
+    },
+    "Spokojna fala — gotowy, możesz dyktować.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A calm wave — ready, you can dictate."
+          }
+        }
+      }
+    },
+    "Kolorowa i ruchoma — nagrywa i idzie za Twoim głosem.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coloured and moving — recording and following your voice."
+          }
+        }
+      }
+    },
+    "Granatowe tło — włączony tryb szeptu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night blue — whisper mode is on."
+          }
+        }
+      }
+    },
+    "Przygaszona — nie ma mikrofonu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimmed — there is no microphone."
+          }
+        }
+      }
+    },
+    "Gdy Whisper rozpoznaje mowę, przez falę przebiega jaśniejsza fala. Wygląd ikony — małe kółko albo szeroka pastylka — zmienisz w Ustawieniach.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While Whisper recognises your speech, a brighter ripple runs through the wave. The icon's look — a small circle or a wide pill — is chosen in Settings."
+          }
+        }
+      }
+    },
+    "Menu VoiceAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The VoiceAI menu"
+          }
+        }
+      }
+    },
+    "Kliknij ikonę: stan, ostatnie dyktowania i wszystkie polecenia są w jednym miejscu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click the icon: the state, your last dictations and every command are in one place."
+          }
+        }
+      }
+    },
+    "Stan i to, ile dziś podyktowałeś — z czasem zaoszczędzonym na pisaniu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The state, and how much you dictated today — with the time saved against typing."
+          }
+        }
+      }
+    },
+    "Ostatnie dyktowania. Kliknięcie kopiuje tekst.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your last dictations. A click copies the text."
+          }
+        }
+      }
+    },
+    "Pliki, słownik, tryb szeptu i czytanie odpowiedzi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files, the word list, whisper mode and reading replies."
+          }
+        }
+      }
+    },
+    "Dziennik, Ustawienia i ta Pomoc.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The journal, Settings and this Help."
+          }
+        }
+      }
+    },
+    "Czas zaoszczędzony liczony jest wobec pisania 40 słów na minutę, minus czas mówienia.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time saved is counted against typing 40 words a minute, minus the time spent speaking."
+          }
+        }
+      }
+    },
+    "Ustawienia dyktowania": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictation settings"
+          }
+        }
+      }
+    },
+    "Mikrofon, z którego nagrywa VoiceAI. Zmień… otwiera Dźwięk w Ustawieniach systemowych.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The microphone VoiceAI records from. Change… opens Sound in System Settings."
+          }
+        }
+      }
+    },
+    "Klawisz dyktowania: prawy albo lewy ⌥, prawy ⌘, ⌃, ⇧ lub fn.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The dictation key: right or left ⌥, right ⌘, ⌃, ⇧ or fn."
+          }
+        }
+      }
+    },
+    "Język, w którym mówisz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The language you speak."
+          }
+        }
+      }
+    },
+    "Tryb szeptu — gdy obok ktoś śpi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper mode — when someone is asleep nearby."
+          }
+        }
+      }
+    },
+    "W trybie szeptu VoiceAI łapie dużo cichszy głos i podgłaśnia nagranie, zanim odda je Whisperowi. Pasek z poziomem głosu można wyłączyć — wtedy zostaje sama ikona w pasku menu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In whisper mode VoiceAI picks up a much quieter voice and turns the recording up before Whisper reads it. The voice level bar can be turned off — then only the menu bar icon is left."
+          }
+        }
+      }
+    },
+    "Słownik": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word list"
+          }
+        }
+      }
+    },
+    "Naucz VoiceAI nazw, których Whisper nie zna, i popraw to, co wciąż przekręca.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teach VoiceAI names Whisper does not know, and fix what it still gets wrong."
+          }
+        }
+      }
+    },
+    "słowa — podpowiedź pisowni: nazwy, marki, skróty.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "slowa (words) — a spelling hint: names, brands, abbreviations."
+          }
+        }
+      }
+    },
+    "zamiany — co Whisper rozpoznał źle i co ma stać zamiast tego.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zamiany (swaps) — what Whisper got wrong, and what should stand there instead."
+          }
+        }
+      }
+    },
+    "aplikacje — kropka na końcu, wielka litera i spacja osobno dla każdego programu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aplikacje (apps) — the final full stop, a capital letter and a space, set for each app."
+          }
+        }
+      }
+    },
+    "Menu → Edytuj słownik… otwiera plik slownik.json w TextEdit. VoiceAI czyta go przed każdym dyktowaniem, więc zmiana działa od razu. Pliku z błędem VoiceAI nie nadpisze — do czasu poprawki działa poprzednia wersja. Reguły aplikacji ustawisz też w Ustawieniach, w sekcji Aplikacje.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu → Edit Word List… opens slownik.json in TextEdit. VoiceAI reads it before every dictation, so a change works at once. A file with a mistake is never written over — the last good version stays in use until it is fixed. The app rules can also be set in Settings, under Apps."
+          }
+        }
+      }
+    },
+    "Dyktujesz, a nie ma gdzie pisać — na biurku albo w Finderze? Tekst trafia do dziennika i nic nie ginie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictating with nowhere to type — on the desktop or in Finder? The text goes to the journal, so nothing is lost."
+          }
+        }
+      }
+    },
+    "Wpisy pogrupowane według dni.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entries grouped by day."
+          }
+        }
+      }
+    },
+    "Każdy wpis z godziną. Zaznacz kilka i naciśnij ⌘C, żeby skopiować tylko je.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each entry with its time. Select a few and press ⌘C to copy just those."
+          }
+        }
+      }
+    },
+    "Kopiuj wszystko albo Eksportuj… — jako Markdown, np. do Obsidiana.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy All, or Export… — as Markdown, for Obsidian for example."
+          }
+        }
+      }
+    },
+    "Pliki audio i wideo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audio and video files"
+          }
+        }
+      }
+    },
+    "Nagranie rozmowy albo film zamienisz w tekst i napisy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn a recorded conversation or a film into text and subtitles."
+          }
+        }
+      }
+    },
+    "Menu → Przepisz plik audio lub wideo… albo upuść pliki na ikonę VoiceAI.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu → Transcribe Audio or Video File…, or drop files on the VoiceAI icon."
+          }
+        }
+      }
+    },
+    "Tekst (.txt) i napisy (.srt) pojawiają się obok pliku i niczego nie nadpisują.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The text (.txt) and subtitles (.srt) appear next to the file and never write over anything."
+          }
+        }
+      }
+    },
+    "Kilka plików VoiceAI przepisuje po kolei, a postęp widać w menu. Długie nagrania czyta po dziesięć minut naraz. Dyktowanie czeka, aż plik się skończy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Several files are done one after another, with the progress in the menu. Long recordings are read ten minutes at a time. Dictation waits until the file is done."
+          }
+        }
+      }
+    },
+    "Odpowiedzi Claude'a na głos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude's replies read aloud"
+          }
+        }
+      }
+    },
+    "Gdy pracujesz z Claude Code, VoiceAI może czytać na głos początek każdej odpowiedzi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you work with Claude Code, VoiceAI can read the start of every reply aloud."
+          }
+        }
+      }
+    },
+    "Czytaj odpowiedzi na głos — włącza i wyłącza czytanie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read replies aloud — turns reading on and off."
+          }
+        }
+      }
+    },
+    "Głos: każdy zainstalowany głos systemowy w języku mowy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voice: any installed system voice in the speech language."
+          }
+        }
+      }
+    },
+    "Tempo, wysokość tonu i głośność. Posłuchaj odtwarza próbkę.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speed, pitch and volume. Listen plays a sample."
+          }
+        }
+      }
+    },
+    "Odpowiedzi przekazuje hook Stop w ~/.claude/settings.json — gotowe polecenie jest w README programu. VoiceAI czyta dwa pierwsze zdania; wciśnięcie klawisza dyktowania przerywa czytanie. Lepsze głosy pobierzesz w Ustawieniach systemowych → Dostępność → Czytaj i mów.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The replies come through a Stop hook in ~/.claude/settings.json — the ready command is in the app's README. VoiceAI reads the first two sentences; pressing the dictation key stops it. Better voices download in System Settings → Accessibility → Read & Speak."
+          }
+        }
+      }
+    },
+    "Porządkowanie i tłumaczenie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidying and translating"
+          }
+        }
+      }
+    },
+    "Opcjonalny model językowy, też na tym Macu: porządkuje tekst albo tłumaczy dyktowanie na inny język.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An optional language model, also on this Mac: it tidies the text or translates your dictation into another language."
+          }
+        }
+      }
+    },
+    "Pobierz — model pobiera się dopiero na Twoje żądanie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download — a model downloads only when you ask for it."
+          }
+        }
+      }
+    },
+    "Tłumacz dyktowanie na: mówisz po polsku, tekst ląduje np. po angielsku.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Translate dictation into: you speak Polish, the text lands in English, for example."
+          }
+        }
+      }
+    },
+    "Porządkuj tekst: bez „yyy” i powtórzeń, z interpunkcją.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidy the text: no “uh” or repeats, with punctuation."
+          }
+        }
+      }
+    },
+    "Model zajmuje ok. 2,7 GB i zwalnia pamięć po 10 minutach bez użycia. Porządkowanie czasem zmienia sens zdania, dlatego jest domyślnie wyłączone. Dodaj własny model… przyjmuje dowolny model MLX z Hugging Face albo folder z dysku.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A model takes about 2.7 GB and frees its memory after 10 minutes unused. Tidying now and then changes what a sentence means, so it is off by default. Add Your Own Model… takes any MLX model from Hugging Face, or a folder on disk."
+          }
+        }
+      }
+    },
+    "Dobrze wiedzieć": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good to know"
+          }
+        }
+      }
+    },
+    "Wszystko zostaje na tym Macu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything stays on this Mac"
+          }
+        }
+      }
+    },
+    "To, co mówisz, nie wychodzi z komputera. Do internetu VoiceAI łączy się tylko po modele i po numer nowej wersji.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What you say never leaves your computer. VoiceAI goes online only to download models and to read the newest version number."
+          }
+        }
+      }
+    },
+    "Raz w miesiącu VoiceAI sprawdza, czy jest nowa wersja. Instaluje ją dopiero, gdy klikniesz „Zainstaluj”.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once a month VoiceAI checks for a new version. It installs only when you click “Install”."
+          }
+        }
+      }
+    },
+    "Język": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
+          }
+        }
+      }
+    },
+    "VoiceAI mówi po polsku i angielsku. Język programu i język mowy ustawiasz w Ustawieniach osobno.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VoiceAI speaks English and Polish. The app's language and the speech language are set separately in Settings."
+          }
+        }
+      }
+    },
+    "Odinstalowanie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uninstalling"
+          }
+        }
+      }
+    },
+    "Ustawienia → Odinstaluj VoiceAI… przenosi do Kosza program, modele, słownik i dziennik — zaznaczasz, co usunąć.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → Uninstall VoiceAI… moves the app, its models, word list and journal to the Trash — you tick what goes."
+          }
+        }
+      }
+    },
+    "Notatki": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes"
+          }
+        }
+      }
+    },
+    "Lista zakupów": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shopping list"
+          }
+        }
+      }
+    },
+    "Kup mleko, chleb i kawę. Zadzwoń do serwisu w sprawie roweru.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy milk, bread and coffee. Call the shop about the bike."
+          }
+        }
+      }
+    },
+    "Kup mleko, chleb i kawę.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy milk, bread and coffee."
+          }
+        }
+      }
+    },
+    "Spotkanie przesuwamy na czwartek, godzina dziesiąta.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's move the meeting to Thursday at ten."
+          }
+        }
+      }
+    },
+    "Dzięki, wszystko działa.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanks, it all works."
+          }
+        }
+      }
+    },
+    "Pomysł na weekend: rower nad jezioro.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekend idea: a bike ride to the lake."
+          }
+        }
+      }
+    },
+    "Zadzwonić do mamy przed piątkiem.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Call Mum before Friday."
+          }
+        }
+      }
+    },
+    "Kupić baterie do pilota.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy batteries for the remote."
+          }
+        }
+      }
+    },
+    "Lista na jutro: poczta, apteka, piekarnia.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tomorrow: post office, pharmacy, bakery."
+          }
+        }
+      }
+    },
+    "Wywiad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interview"
+          }
+        }
+      }
+    },
+    "Więcej": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More"
+          }
+        }
+      }
+    },
+    "Mniej": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Less"
+          }
+        }
+      }
+    },
+    "Natywne programy dla macOS, budowane według jednego wzoru.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Native macOS software, built to a single pattern."
+          }
+        }
+      }
+    },
+    "W menu wybierz Ustawienia… — zmiany działają od razu, bez zapisywania.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose Settings… in the menu — changes apply right away, there is nothing to save."
+          }
+        }
+      }
+    },
+    "Dziennik otworzysz z menu (Dziennik…). Tekst może też trafić na biurko jako plik — to ustawienie „Gdy nie ma pola tekstowego” w Ustawieniach.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the journal from the menu (Journal…). The text can also land on the desktop as a file — that is “When there is no text field” in Settings."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

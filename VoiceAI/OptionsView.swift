@@ -42,15 +42,33 @@ struct OptionsView: View {
     @AppStorage(Setting.voice) private var voice = ""
     @AppStorage(VoiceCommand.pathKey) private var voiceCommand = ""
     @AppStorage(Setting.desktopFile) private var desktopFile = true
-    @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
-    @State private var interface = Language.chosenInterface ?? Self.automatic
+    @State private var launchAtLogin: Bool
+    @State private var interface: String
     /// What the app runs in now — a different choice needs a restart.
-    private let runningInterface = Language.chosenInterface ?? Self.automatic
+    private let runningInterface: String
     private static let automatic = "auto"
+    /// Help's picture of this window: a made-up microphone, no date of the last update check, the
+    /// language left on automatic — nothing of this Mac. The settings come from the sample store
+    /// set with `.defaultAppStorage`.
+    private let sample: Bool
+    static let sampleMicrophone = "USB Microphone"
     @State private var sizes: [String: Int64] = [:]
     @ObservedObject private var updates = Updates.shared
     @AppStorage(Setting.checkUpdates) private var checkUpdates = true
     @AppStorage(Setting.dictationKey) private var dictationKey = DictationKey.fallback.rawValue
+
+    init(vocabulary: VocabularyStore, textModel: TextModel, speaker: Speaker, sample: Bool = false) {
+        self.vocabulary = vocabulary
+        self.textModel = textModel
+        self.speaker = speaker
+        self.sample = sample
+        let chosen = sample ? Self.automatic : Language.chosenInterface ?? Self.automatic
+        _interface = State(initialValue: chosen)
+        runningInterface = chosen
+        _launchAtLogin = State(initialValue: sample || SMAppService.mainApp.status == .enabled)
+    }
+
+    private var microphoneName: String? { sample ? Self.sampleMicrophone : microphone.name }
 
     private var voices: [AVSpeechSynthesisVoice] { Speaker.voices(for: vocabulary.current.jezyk) }
 
@@ -76,6 +94,9 @@ struct OptionsView: View {
                 .onChange(of: interface) { _, code in
                     Language.chosenInterface = code == Self.automatic ? nil : code
                 }
+                LabeledContent("Pomoc") {
+                    Button("Pierwsze kroki z VoiceAI…") { HelpWindow.shared.show() }
+                }
                 if interface != runningInterface {
                     HStack {
                         Text("Nowy język pojawi się po ponownym uruchomieniu.")
@@ -88,8 +109,8 @@ struct OptionsView: View {
             Section {
                 LabeledContent("Mikrofon") {
                     HStack {
-                        Text(verbatim: microphone.name ?? String(localized: "Brak mikrofonu"))
-                            .foregroundStyle(microphone.name == nil ? .red : .secondary)
+                        Text(verbatim: microphoneName ?? String(localized: "Brak mikrofonu"))
+                            .foregroundStyle(microphoneName == nil ? .red : .secondary)
                         Button("Zmień…") { Microphone.openSoundSettings() }
                     }
                 }
@@ -383,7 +404,7 @@ struct OptionsView: View {
     }
 
     private var lastCheckText: String {
-        guard let date = updates.lastCheck else { return String(localized: "Jeszcze nie sprawdzano") }
+        guard !sample, let date = updates.lastCheck else { return String(localized: "Jeszcze nie sprawdzano") }
         return String(localized: "Ostatnio: \(date.formatted(date: .abbreviated, time: .shortened))")
     }
 

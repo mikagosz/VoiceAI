@@ -113,6 +113,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             waitForAccessibility()
         }
         loadModel()
+        // `--show-help`: the Help window right away — for a look after changes, without the menu.
+        if CommandLine.arguments.contains("--show-help") { HelpWindow.shared.show() }
     }
 
     /// Key monitors added before the permission was granted stay deaf, so they are
@@ -542,6 +544,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(voiceMenu())
         menu.addItem(item(String(localized: "Dziennik…"), #selector(openJournal), symbol: "book.closed"))
         menu.addItem(item(String(localized: "Ustawienia…"), #selector(openOptions), symbol: "gearshape"))
+        menu.addItem(item(String(localized: "Pomoc VoiceAI"), #selector(openHelp), symbol: "questionmark.circle"))
         menu.addItem(item(String(localized: "Sprawdź aktualizacje…"), #selector(checkUpdates)))
         menu.addItem(.separator())
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
@@ -687,6 +690,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func openOptions() {
         showOptions()
+    }
+
+    @objc private func openHelp() {
+        HelpWindow.shared.show()
     }
 
     func showJournal() {
